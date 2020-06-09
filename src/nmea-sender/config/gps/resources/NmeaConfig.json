@@ -1,0 +1,87 @@
+{
+    "RemoteIp": "172.21.101.1",
+    "RemotePort": 32103,
+    "Telegrams": [{
+        "TelegramName": "GPGGA",
+        "Fields": [ {
+            "VariableName": "UTCTime",
+            "Decimals": 2,
+            "Length": 9
+        },{
+            "VariableName": "Latitude",
+            "Decimals": 4,
+            "Length": 9
+        },{
+            "VariableName": "LatitudeDirection"
+        },{
+            "VariableName": "Longitude",
+            "Decimals": 4,
+            "Length": 10
+        },{
+            "VariableName": "LongitudeDirection"
+        },{
+            "VariableName": "Quality",
+            "Length": 1
+        },{
+            "VariableName": "NumberOfSatellites",
+            "Length": 2
+        },{
+            "VariableName": "HorizontalDilution",
+            "Decimals": 1,
+            "Length": 5
+        },{
+            "VariableName": "AntennaAltitude",
+            "Decimals": 0,
+            "Length": 5
+        },{
+            "VariableName": "AntennaUnits"
+        },{
+            "VariableName": "GeoidalSeperation",
+            "Length": 4
+        },{
+            "VariableName": "GeoidalSeperationUnits"
+        },{
+            "VariableName": "GpsAge",
+            "Decimals": 1,
+            "Length": 4
+        },{
+            "VariableName": "StationId",
+            "Length": 4
+        }]
+    },{
+        "TelegramName": "GPGST",
+        "Fields": [{
+            "VariableName": "UTCTime",
+            "Decimals": 2,
+            "Length": 9
+        },{
+            "VariableName": "SigmaRms",
+            "Decimals": 1,
+            "Length": 3
+        },{
+            "VariableName": "SigmaMajorAxis",
+            "Decimals": 1,
+            "Length": 3
+        },{
+            "VariableName": "SigmaMinorAxis",
+            "Decimals": 1,
+            "Length": 3
+        },{
+            "VariableName": "EllipseOrientation",
+            "Decimals": 1,
+            "Length": 3
+        },{
+            "VariableName": "SigmaLongitude",
+            "Decimals": 1,
+            "Length": 3
+        },{
+            "VariableName": "SigmaLatitude",
+            "Decimals": 1,
+            "Length": 3
+        },{
+            "VariableName": "SigmaAltitude",
+            "Decimals": 1,
+            "Length": 3
+        }]
+    }]
+}

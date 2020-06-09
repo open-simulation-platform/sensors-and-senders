@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="thruster_feedback" guid="086c8873-2f16-4923-96a3-82f74be202a0">
+    <CoSimulation modelIdentifier="libNmeaSender" canHandleVariableCommunicationStepSize="true" />
+    <DefaultExperiment />
+
+    <ModelVariables>
+        <ScalarVariable name="thruster_1_thruster_number" valueReference="1" description="Thruster number (range 1→6)" causality="input">
+            <Integer start="1"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_1_rpm" valueReference="2" description="Thruster RPM feedback (range -100.0→100.0%)" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_1_rpm_status" valueReference="3" description="RPM input value is OK (A = OK, V = Not OK)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_1_azimuth" valueReference="4" description="Thruster azimuth feedback (range -180.0→180.0 degrees). This is thruster force direction (not flush direction), relative to vessel bow." causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_1_azimuth_status" valueReference="5" description="Azimuth input value is OK (A = OK, V = Not OK)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_1_running" valueReference="6" description="Thruster running (A = running, V = not running)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_1_ready" valueReference="7" description="Thruster ready to be controlled by DP system (A = ready, V = not ready)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_1_control_position" valueReference="8" description="Thruster control position (2 = DP, 0 = None, 1 = Lever). Normally set this to 2." causality="input">
+            <Integer start="2"/>
+        </ScalarVariable>
+
+        <ScalarVariable name="thruster_2_thruster_number" valueReference="9" description="Thruster number (range 1→6)" causality="input">
+            <Integer start="2"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_2_rpm" valueReference="10" description="Thruster RPM feedback (range -100.0→100.0%)" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_2_rpm_status" valueReference="11" description="RPM input value is OK (A = OK, V = Not OK)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_2_azimuth" valueReference="12" description="Thruster azimuth feedback (range -180.0→180.0 degrees). This is thruster force direction (not flush direction), relative to vessel bow." causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_2_azimuth_status" valueReference="13" description="Azimuth input value is OK (A = OK, V = Not OK)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_2_running" valueReference="14" description="Thruster running (A = running, V = not running)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_2_ready" valueReference="15" description="Thruster ready to be controlled by DP system (A = ready, V = not ready)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_2_control_position" valueReference="16" description="Thruster control position (2 = DP, 0 = None, 1 = Lever). Normally set this to 2." causality="input">
+            <Integer start="2"/>
+        </ScalarVariable>
+
+    <ScalarVariable name="thruster_3_thruster_number" valueReference="17" description="Thruster number (range 1→6)" causality="input">
+            <Integer start="1"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_3_rpm" valueReference="18" description="Thruster RPM feedback (range -100.0→100.0%)" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_3_rpm_status" valueReference="19" description="RPM input value is OK (A = OK, V = Not OK)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_3_azimuth" valueReference="20" description="Thruster azimuth feedback (range -180.0→180.0 degrees). This is thruster force direction (not flush direction), relative to vessel bow." causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_3_azimuth_status" valueReference="21" description="Azimuth input value is OK (A = OK, V = Not OK)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_3_running" valueReference="22" description="Thruster running (A = running, V = not running)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_3_ready" valueReference="23" description="Thruster ready to be controlled by DP system (A = ready, V = not ready)" causality="input">
+            <String start="V"/>
+        </ScalarVariable>
+        <ScalarVariable name="thruster_3_control_position" valueReference="24" description="Thruster control position (2 = DP, 0 = None, 1 = Lever). Normally set this to 2." causality="input">
+            <Integer start="2"/>
+        </ScalarVariable>
+
+        </ModelVariables>
+
+
+    <ModelStructure />
+
+</fmiModelDescription>

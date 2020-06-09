@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="Gyro-Nmea-Sender" guid="530568da-5532-4eac-aab6-f96f482c4e74">
+    <CoSimulation modelIdentifier="libNmeaSender" canHandleVariableCommunicationStepSize="true" />
+    <DefaultExperiment />
+
+    <ModelVariables>
+        <ScalarVariable name="Heading" valueReference="1" description="Vessel heading (0-360 degrees)" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="HeadingOk" valueReference="2" description="Heading value is OK (A = OK, all other statuses are not accepted)." causality="input">
+            <String start=""/>
+        </ScalarVariable>
+    </ModelVariables>
+
+    <ModelStructure />
+
+</fmiModelDescription>

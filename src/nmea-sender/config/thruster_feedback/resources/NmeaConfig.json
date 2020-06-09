@@ -1,0 +1,165 @@
+{
+    "RemoteIp": "172.21.101.1",
+    "RemotePort": 32104,
+    "Telegrams": [{
+        "TelegramName": "PTHF",
+        "Fields": [{
+            "VariableName": "thruster_1_thruster_number",
+            "DefaultValue": 1
+        },{
+            "VariableName": "thruster_1_rpm",
+            "Decimals": 1,
+            "Length": 5
+        },{
+            "VariableName": "thruster_1_rpm_status"
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "thruster_1_azimuth",
+            "Decimals": 1,
+            "Length": 5
+        },{
+            "VariableName": "thruster_1_azimuth_status"
+        },{
+            "VariableName": "thruster_1_running"
+        },{
+            "VariableName": "thruster_1_ready"
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0
+        },{
+            "VariableName": "thruster_1_control_position",
+            "DefaultValue": 2,
+            "Length": 1
+        }]
+    },{
+        "TelegramName": "PTHF",
+        "Fields": [{
+            "VariableName": "thruster_2_thruster_number",
+            "DefaultValue": 2
+        },{
+            "VariableName": "thruster_2_rpm",
+            "Decimals": 1,
+            "Length": 5
+        },{
+            "VariableName": "thruster_2_rpm_status"
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "thruster_2_azimuth",
+            "Decimals": 1,
+            "Length": 5
+        },{
+            "VariableName": "thruster_2_azimuth_status"
+        },{
+            "VariableName": "thruster_2_running"
+        },{
+            "VariableName": "thruster_2_ready"
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "thruster_2_control_position",
+            "DefaultValue": 2,
+            "Length": 1
+        }]
+    },{
+        "TelegramName": "PTHF",
+        "Fields": [{
+            "VariableName": "thruster_3_thruster_number",
+            "DefaultValue": 3,
+            "Length": 1
+        },{
+            "VariableName": "thruster_3_rpm",
+            "Decimals": 1,
+            "Length": 5
+        },{
+            "VariableName": "thruster_3_rpm_status"
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "thruster_3_azimuth",
+            "Decimals": 1,
+            "Length": 5
+        },{
+            "VariableName": "thruster_3_azimuth_status"
+        },{
+            "VariableName": "thruster_3_running"
+        },{
+            "VariableName": "thruster_3_ready"
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "thruster_3_control_position",
+            "DefaultValue": 2,
+            "Length": 1
+        }]
+    }]
+}

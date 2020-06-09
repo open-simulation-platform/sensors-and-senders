@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="Wind-Nmea-Sender" guid="530568da-5532-4eac-aab6-f96f482c4e74">
+    <CoSimulation modelIdentifier="libNmeaSender" canHandleVariableCommunicationStepSize="true" />
+    <DefaultExperiment />
+
+    <ModelVariables>
+        <ScalarVariable name="Direction" valueReference="1" description="Wind direction relative vessel bow (+/- 180 degrees)" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>        
+        <ScalarVariable name="Reference" valueReference="2" description="Direction reference (R = relative direction)" causality="input">
+            <String start="R"/>
+        </ScalarVariable>        
+        <ScalarVariable name="Speed" valueReference="3" description="Wind speed (meter/second)" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>        
+        <ScalarVariable name="SpeedUnit" valueReference="4" description="Wind speed unit (M = meter/second)" causality="input">
+            <String start="M"/>
+        </ScalarVariable>
+        <ScalarVariable name="Status" valueReference="5" description="Wind sensor is OK (A = OK, all other statuses are not accepted)" causality="input">
+            <String start="A"/>
+        </ScalarVariable>
+    </ModelVariables>
+    <ModelStructure />
+
+</fmiModelDescription>

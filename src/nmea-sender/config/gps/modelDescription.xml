@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="GPS-Nmea-Sender" guid="530568da-5532-4eac-aab6-f96f482c4e74">
+    <CoSimulation modelIdentifier="libNmeaSender" canHandleVariableCommunicationStepSize="true" />
+    <DefaultExperiment />
+    <ModelVariables>
+        <ScalarVariable name="UTCTime" valueReference="1" description="Timestamp of position (hh = hour, mm = minute, ss.ss = second)" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="Latitude" valueReference="2" description="Latitude in degrees and minutes (dd = degrees, mm.mmmm = minutes)" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="LatitudeDirection" valueReference="3" description="Direction of latitude (N = North, S = South)" causality="input">
+            <String start="N"/>
+        </ScalarVariable>
+        <ScalarVariable name="Longitude" valueReference="4" description="Longitudes in degrees and minutes (ddd = degrees, mm.mmmm = minutes)" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="LongitudeDirection" valueReference="5" description="Direction of longitude (E = East, W = West)" causality="input">
+            <String start="E"/>
+        </ScalarVariable>
+        <ScalarVariable name="Quality" valueReference="6" description="Accuracy of GPS signal (Range 0→8, normally 2 for differential corrected position)" causality="input">
+            <Integer start="0"/>
+        </ScalarVariable>
+        <ScalarVariable name="NumberOfSatellites" valueReference="7" description="Number of satellites in use" causality="input">
+            <Integer start="0"/>
+        </ScalarVariable>
+        <ScalarVariable name="HorizontalDilution" valueReference="8" description="Number of satellites in use" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="AntennaAltitude" valueReference="9" description="Number of satellites in use" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="AntennaUnits" valueReference="10" description="Number of satellites in use" causality="input">
+            <String start=""/>
+        </ScalarVariable>
+        <ScalarVariable name="GeoidalSeperation" valueReference="11" description="Number of satellites in use" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="GeoidalSeperationUnits" valueReference="12" description="Number of satellites in use" causality="input">
+            <String start=""/>
+        </ScalarVariable>
+        <ScalarVariable name="GpsAge" valueReference="13" description="Number of satellites in use" causality="input">
+            <Integer start="0"/>
+        </ScalarVariable>
+        <ScalarVariable name="StationId" valueReference="14" description="Number of satellites in use" causality="input">
+            <Integer start="0"/>
+        </ScalarVariable>
+        <ScalarVariable name="SigmaRms" valueReference="15" description="Number of satellites in use" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="SigmaMajorAxis" valueReference="16" description="Number of satellites in use" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="SigmaMinorAxis" valueReference="17" description="Number of satellites in use" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="EllipseOrientation" valueReference="18" description="Number of satellites in use" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="SigmaLongitude" valueReference="19" description="Number of satellites in use" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="SigmaLatitude" valueReference="20" description="Number of satellites in use" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="SigmaAltitude" valueReference="21" description="Number of satellites in use" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+    </ModelVariables>
+    <ModelStructure />
+</fmiModelDescription>

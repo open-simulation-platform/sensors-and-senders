@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="gnss_sensor" guid="ece13b89-10b5-44fc-a9d0-238b93742479">
+    <CoSimulation 
+        modelIdentifier="libgps" 
+        canHandleVariableCommunicationStepSize="true"
+        canNotUseMemoryManagementFunctions="true" 
+    />
+    <DefaultExperiment />
+
+    <ModelVariables>
+
+        <ScalarVariable name="utc_time" valueReference="0" description="Timestamp of position (hh = hour, mm = minute, ss.ss = second)" causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="latitude" valueReference="1" description="Latitude in degrees and minutes (dd = degrees, mm.mmmm = minutes)" causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="latitude_direction" valueReference="2" description="Direction of latitude (N = North, S = South)" causality="output">
+            <String />
+        </ScalarVariable>
+        <ScalarVariable name="longitude" valueReference="3" description="Longitudes in degrees and minutes (ddd = degrees, mm.mmmm = minutes)" causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="longitude_direction" valueReference="4" description="Direction of longitude (E = East, W = West)" causality="output">
+            <String />
+        </ScalarVariable>
+        <ScalarVariable name="quality" valueReference="5" description="Accuracy of GPS signal (Range 0→8, normally 2 for differential corrected position)" causality="output">
+            <Integer />
+        </ScalarVariable>
+        <ScalarVariable name="number_of_satellites" valueReference="6" description="Number of satellites" causality="output">
+            <Integer />
+        </ScalarVariable>
+        <ScalarVariable name="horizontal_dilution" valueReference="7" description="Horizontal dilution"  causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="altitude" valueReference="8" description="Height above sea level " causality="output">
+            <Integer />
+        </ScalarVariable>        
+        <ScalarVariable name="altitude_unit" valueReference="9" description="Unit of altitude (M = Meters)" causality="output">
+            <String />
+        </ScalarVariable>       
+         <ScalarVariable name="height_geo_id" valueReference="10" description="Height of Geo ID " causality="output">
+            <Integer />
+        </ScalarVariable>        
+        <ScalarVariable name="height_unit" valueReference="11" description="Unit of height (M = Meters)" causality="output">
+            <String />
+        </ScalarVariable>
+        <ScalarVariable name="update_time" valueReference="12" description="Time since last GPS update (time in seconds)" causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="station_id" valueReference="13" description="GPS station ID" causality="output">
+            <Integer />
+        </ScalarVariable>
+                
+        <ScalarVariable name="rms_residual" valueReference="14" description="RMS value of the pseudo range residuals; includes carrier phase residuals during periods of RTK (float) and RTK (fixed) processing" causality="output">
+            <Real />
+        </ScalarVariable>       
+         <ScalarVariable name="error_ellipse_major" valueReference="15" description="Error ellipse semi-major axis 1 sigma error, in meters" causality="output">
+            <Real />
+        </ScalarVariable>        
+        <ScalarVariable name="error_ellipse_minor" valueReference="16" description="Error ellipse semi-minor axis 1 sigma error, in meters " causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="ellipse_orientation" valueReference="17" description="TError ellipse orientation, degrees from true north " causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="lat_sigma_error" valueReference="18" description="Latitude 1 sigma error, in meters " causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="long_sigma_error" valueReference="19" description="Longitude 1 sigma error, in meters " causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="height_sigma_error" valueReference="20" description="Height 1 sigma error, in meters " causality="output">
+            <Real />
+        </ScalarVariable>
+
+        <ScalarVariable name="north" valueReference="21" description="Vessel north position" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="east" valueReference="22" description="Vessel east position" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="down" valueReference="23" description="Vessel down position" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="roll" valueReference="24" description="Vessel roll position" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="pitch" valueReference="25" description="Vessel pitch position" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="yaw" valueReference="26" description="Vessel yaw position" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+
+        
+        <ScalarVariable name="north_noise_mean" valueReference="27" description="Vessel yaw position" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="north_noise_std" valueReference="28" description="Vessel yaw position" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="east_noise_mean" valueReference="29" description="Vessel yaw position" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="east_noise_std" valueReference="30" description="Vessel yaw position" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="down_noise_mean" valueReference="31" description="Vessel yaw position" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="down_noise_std" valueReference="32" description="Vessel yaw position" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+
+        <ScalarVariable name="antenna_pos_x" valueReference="33" description="Antenna x position relative to midships" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>        
+        <ScalarVariable name="antenna_pos_y" valueReference="34" description="Antenna y position relative to midships" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>        
+        <ScalarVariable name="antenna_pos_z" valueReference="35" description="Antenna z position relative to midships" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+
+    </ModelVariables>
+
+    <ModelStructure />
+
+</fmiModelDescription>

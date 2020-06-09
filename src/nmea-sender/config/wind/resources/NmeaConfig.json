@@ -1,0 +1,22 @@
+{
+    "RemoteIp": "172.21.101.1",
+    "RemotePort": 32101,
+    "Telegrams": [{
+        "TelegramName": "KKMWV",
+        "Fields": [{
+            "VariableName": "Direction",
+            "Decimals": 1,
+            "Length": 5
+        },{
+            "VariableName": "Reference"
+        },{
+            "VariableName": "Speed",
+            "Decimals": 1,
+            "Length": 4
+        },{
+            "VariableName": "SpeedUnit"
+        },{
+            "VariableName": "Status"
+        }]
+    }]
+}

@@ -1,0 +1,39 @@
+{
+    "RemoteIp": "172.21.101.1",
+    "RemotePort": 32102,
+    "Telegrams": [{
+        "TelegramName": "KKSXN",
+        "Fields": [{
+            "VariableName": "SensorOk",
+            "Length": 2
+        },{
+            "VariableName": "Unused",
+            "DefaultValue": 0,
+            "Length": 1
+        },{
+            "VariableName": "Roll",
+            "Decimals": 2,
+            "Length": 4
+        },{
+            "VariableName": "Pitch",
+            "Decimals": 2,
+            "Length": 4
+        },{
+            "VariableName": "Unused",
+            "Decimals": 2,
+            "Length": 4
+        },{
+            "VariableName": "Unused",
+            "Decimals": 4,
+            "Length":  6
+        },{
+            "VariableName": "Unused",
+            "Decimals": 4,
+            "Length": 6
+        },{
+            "VariableName": "Unused",
+            "Decimals": 1,
+            "Length": 3
+        }]
+    }]
+}

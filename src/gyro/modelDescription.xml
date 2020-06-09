@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="gyro_sensor_model" guid="ab8d076f-0efd-4a7f-942e-edb713ffe981">
+    <CoSimulation 
+        modelIdentifier="libgyroSensor" 
+        canHandleVariableCommunicationStepSize="true"
+        canNotUseMemoryManagementFunctions="true" 
+    />
+    <DefaultExperiment />
+
+    <ModelVariables>
+
+        <ScalarVariable name="heading_measurement" valueReference="0" description="Vessel heading (0-360 degrees)" causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="heading_ok" valueReference="1" description="Heading value is OK (A = OK, all other statuses are not accepted)." causality="output">
+            <String />
+        </ScalarVariable>
+
+        <ScalarVariable name="heading" valueReference="2" description="Heading in radians" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+
+        <ScalarVariable name="heading_noise_mean" valueReference="3" description="Heading noise mean value" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+
+        <ScalarVariable name="heading_noise_standard_deviation" valueReference="4" description="Heading noise standard deviation in radians" causality="parameter" variability="tunable">
+            <Real start="0.0087"/>
+        </ScalarVariable>
+
+        <ScalarVariable name="enable_sensor_fault" valueReference="5" description="Sets sensor to nok OK when true" causality="parameter" variability="tunable">
+            <Boolean start="false"/>
+        </ScalarVariable>
+
+
+
+    </ModelVariables>
+
+    <ModelStructure />
+
+</fmiModelDescription>

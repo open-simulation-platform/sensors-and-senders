@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="vru_sensor" guid="5c42c513-66eb-4363-9a36-c9b212c5ef9e">
+    <CoSimulation 
+        modelIdentifier="libvruSensor" 
+        canHandleVariableCommunicationStepSize="true"
+        canNotUseMemoryManagementFunctions="true" 
+    />
+    <DefaultExperiment />
+
+    <ModelVariables>
+
+        <ScalarVariable name="sensor_ok" valueReference="0" description="VRS sensor is OK (10 = OK, 11 = NOT OK)" causality="output">
+            <Integer />
+        </ScalarVariable>
+        <ScalarVariable name="roll_measurement" valueReference="1" description="Vessel roll in radians (Positive values = port up, negative values = port down)." causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="pitch_measurement" valueReference="2" description="Vessel pitch in radians (Positive values = bow up, negative values = bow down)." causality="output">
+            <Real />
+        </ScalarVariable>
+
+        <ScalarVariable name="roll" valueReference="3" description="Vessel pitch in radians (Positive values = bow up, negative values = bow down)." causality="input">
+            <Real start="0.0" />
+        </ScalarVariable>
+
+        <ScalarVariable name="pitch" valueReference="4" description="Vessel pitch in radians (Positive values = bow up, negative values = bow down)." causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable>
+
+        <ScalarVariable name="roll_noise_mean" valueReference="5" description="Mean value of roll noise" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+
+        <ScalarVariable name="roll_noise_standard_deviation" valueReference="6" description="Standard deviation of roll noise in radians" causality="parameter" variability="tunable">
+            <Real start="0.0087"/>
+        </ScalarVariable>
+
+
+        <ScalarVariable name="pitch_noise_mean" valueReference="7" description="Mean value of roll noise" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+
+        <ScalarVariable name="pitch_noise_standard_deviation" valueReference="8" description="Standard deviation of roll noise in radians" causality="parameter" variability="tunable">
+            <Real start="0.0087"/>
+        </ScalarVariable>
+
+        <ScalarVariable name="enable_sensor_fault" valueReference="9" description="Sets sensor to nok OK when true" causality="parameter" variability="tunable">
+            <Boolean start="false"/>
+        </ScalarVariable>
+
+    </ModelVariables>
+
+    <ModelStructure />
+
+</fmiModelDescription>

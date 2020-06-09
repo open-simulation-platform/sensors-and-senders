@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="Vru-Nmea-Sender" guid="530568da-5532-4eac-aab6-f96f482c4e74">
+    <CoSimulation modelIdentifier="libNmeaSender" canHandleVariableCommunicationStepSize="true" />
+    <DefaultExperiment />
+
+    <ModelVariables>
+        <ScalarVariable name="SensorOk" valueReference="1" description="VRS sensor is OK (10 = OK, 11 = NOT OK)." causality="input">
+            <Integer start="10"/>
+        </ScalarVariable>
+        <ScalarVariable name="Roll" valueReference="2" description="Vessel roll in radians (Positive values = port up, negative values = port down)" causality="input">
+            <Integer start="10"/>
+        </ScalarVariable>
+        <ScalarVariable name="Pitch" valueReference="3" description="Vessel pitch in radians (Positive values = bow up, negative values = bow down)." causality="input">
+            <Integer start="10"/>
+        </ScalarVariable>
+    </ModelVariables>
+
+    <ModelStructure />
+
+</fmiModelDescription>
