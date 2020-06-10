@@ -14,8 +14,6 @@ add_library(project_warnings INTERFACE)
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings)
 
-include(cmake/StaticAnalyzers.cmake)
-
 if(NOT WIN32)
     set(CMAKE_BUILD_RPATH_USE_ORIGIN TRUE)
 endif()

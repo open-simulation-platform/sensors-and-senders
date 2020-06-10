@@ -1,10 +1,11 @@
-#include <common/math/Conversions.h>
+#include "common/math/Conversions.h"
 #define _USE_MATH_DEFINES 
 #include <cmath>
 
 double constrain_angle(double angle_in_degrees) {
 
-    angle_in_degrees = std::fmod(angle_in_degrees, 360);
+    constexpr auto degrees_in_circle = 360;
+    angle_in_degrees = std::fmod(angle_in_degrees, degrees_in_circle);
     if(angle_in_degrees < 0) {
         angle_in_degrees += 360;
     }
