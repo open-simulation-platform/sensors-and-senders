@@ -26,6 +26,12 @@ public:
 
     virtual ~Component() = default;
 
+    Component(const Component&) = default;
+    Component(Component&&) = default;
+
+    Component& operator=(const Component&) = default;
+    Component& operator=(Component&&) = default;
+
     void setReal(fmi2ValueReference reference, fmi2Real value);
     std::optional<double> real(fmi2ValueReference reference) const;
 
@@ -53,10 +59,9 @@ protected:
 
     std::map<fmi2ValueReference, Value> values_;
 
-    const std::string instance_name_;
-    const std::string uuid_;
+    std::string instance_name_;
+    std::string uuid_;
     std::string resources_directory_;
-    const fmi2Type type_;
+    fmi2Type type_;
     const fmi2CallbackFunctions* callback_functions_;
-
 };
