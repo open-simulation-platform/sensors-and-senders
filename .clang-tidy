@@ -1,0 +1,6 @@
+---
+Checks:          '*,-modernize-use-nodiscard,-fuchsia-*,-google-*,-zircon-*,-abseil-*,-modernize-use-trailing-return-type,-llvm-*,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers,
+    -cppcoreguidelines-non-private-member-variables-in-classes,-misc-non-private-member-variables-in-classes'
+WarningsAsErrors: '1'
+HeaderFilterRegex: ''
+FormatStyle:     none
