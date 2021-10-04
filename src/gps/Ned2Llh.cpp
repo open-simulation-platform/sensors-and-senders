@@ -1,4 +1,5 @@
 #include "Ned2Llh.hpp"
+#include "common/math/Conversions.hpp"
 #define _USE_MATH_DEFINES 
 #include <cmath>
 
@@ -42,12 +43,4 @@ double Ned2LLH::rm() const {
     return (1 - std::pow(_earth_eccentricity, 2)) *
     _rn /
     ( 1 - std::pow(std::sin(deg2rad(_initial_latitude)), 2) * std::pow(_earth_eccentricity, 2));  
-}
-
-double rad2deg(double rad) {
-    return rad * 180 / M_PI;
-}
-
-double deg2rad(double deg) {
-    return deg * M_PI / 180;
 }

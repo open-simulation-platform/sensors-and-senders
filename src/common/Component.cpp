@@ -88,7 +88,7 @@ const std::string_view Component::resourcesDirectory() const {
 }
 
 void Component::logMessage(const fmi2Status& status, const std::string& message, const std::string& category) const {
-    if(callback_functions_ && callback_functions_->logger) {
+    if(callback_functions_ != nullptr && callback_functions_->logger != nullptr) {
             callback_functions_->logger(nullptr, instance_name_.c_str(), status, category.c_str(),
         message.c_str());
     }
