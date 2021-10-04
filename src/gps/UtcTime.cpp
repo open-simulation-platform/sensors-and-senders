@@ -1,4 +1,4 @@
-#include "UtcTime.h"
+#include "UtcTime.hpp"
 #include <cmath>
 
 UtcTime::UtcTime()

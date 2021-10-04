@@ -1,4 +1,4 @@
-#include "GyroComponent.h"
+#include "GyroComponent.hpp"
 #include <iostream>
 
 GyroComponent::GyroComponent(const std::string& instance_name, const fmi2Type type, const fmi2String uuid,

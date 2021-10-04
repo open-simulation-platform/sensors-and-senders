@@ -1,8 +1,8 @@
 target_sources(math
     PRIVATE
     MarkovNoise.cpp
-    MarkovNoise.h
+    MarkovNoise.hpp
 
     Conversions.cpp
-    Conversions.h
+    Conversions.hpp
 )

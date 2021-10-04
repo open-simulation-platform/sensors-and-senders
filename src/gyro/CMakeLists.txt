@@ -4,8 +4,8 @@ target_sources(gyro
     Gyro.cpp
     FmiInstantiate.cpp
     
-    GyroComponent.h
-    Gyro.h
+    GyroComponent.hpp
+    Gyro.hpp
     
     ../common/FmiFunctions.cpp
     )

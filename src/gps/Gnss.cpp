@@ -1,6 +1,6 @@
-#include "Gnss.h"
-#include <string>
 #include <cmath>
+
+#include "Gnss.hpp"
 
 PosRefOffset::PosRefOffset(const AntennaPosition& antenna_position) 
     : _antenna_position(antenna_position)

@@ -6,10 +6,10 @@ target_sources(gps
     Ned2Llh.cpp
     UtcTime.cpp
     
-    GpsComponent.h
-    Gnss.h
-    Ned2Llh.h
-    UtcTime.h
+    GpsComponent.hpp
+    Gnss.hpp
+    Ned2Llh.hpp
+    UtcTime.hpp
     
     ../common/FmiFunctions.cpp
 )

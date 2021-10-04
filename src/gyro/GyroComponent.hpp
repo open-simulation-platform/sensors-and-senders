@@ -1,8 +1,7 @@
 #pragma once
 
-#include <memory>
-#include "Gyro.h"
-#include <common/Component.h>
+#include "Gyro.hpp"
+#include "common/Component.hpp"
 
 class GyroComponent : public Component {
 public:

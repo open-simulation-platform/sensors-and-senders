@@ -1,7 +1,8 @@
 #pragma once 
 
-#include <common/math/MarkovNoise.h>
 #include <string>
+
+#include "common/math/MarkovNoise.hpp"
 
 class Gyro {
 public:

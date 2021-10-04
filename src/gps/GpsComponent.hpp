@@ -1,8 +1,10 @@
 #pragma once
 
 #include <memory>
-#include "Gnss.h"
-#include <common/Component.h>
+#include <string>
+
+#include "Gnss.hpp"
+#include "common/Component.hpp"
 
 class GpsComponent : public Component {
 public:

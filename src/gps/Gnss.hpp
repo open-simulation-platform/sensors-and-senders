@@ -1,9 +1,11 @@
 #pragma once
+
 #include <string>
 #include <array>
-#include "Ned2Llh.h"
-#include <common/math/MarkovNoise.h>
-#include "UtcTime.h"
+
+#include "Ned2Llh.hpp"
+#include "common/math/MarkovNoise.hpp"
+#include "UtcTime.hpp"
 
 struct AntennaPosition {
     double x = 0.0;

@@ -2,19 +2,19 @@ target_sources(nmea_sender
     PRIVATE
 
     NmeaSenderComponent.cpp
-    NmeaSenderComponent.h
+    NmeaSenderComponent.hpp
 
     ConfigParser.cpp
-    ConfigParser.h
+    ConfigParser.hpp
 
     Enums.cpp
-    Enums.h
+    Enums.hpp
 
     FmiInstantiate.cpp
     NmeaTelegram.cpp
-    NmeaTelegram.h
+    NmeaTelegram.hpp
     UdpSender.cpp
-    UdpSender.h
+    UdpSender.hpp
     ../common/FmiFunctions.cpp
 )
 

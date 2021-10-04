@@ -1,4 +1,4 @@
-#include "WindSensorComponent.h"
+#include "WindSensorComponent.hpp"
 #include <iostream>
 
 WindSensorComponent::WindSensorComponent(const std::string& instance_name, const fmi2Type type, const fmi2String uuid,

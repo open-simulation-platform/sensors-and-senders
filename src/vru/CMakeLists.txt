@@ -1,10 +1,10 @@
 target_sources(vru
     PRIVATE
     VruComponent.cpp
-    VruComponent.h
+    VruComponent.hpp
     FmiInstantiate.cpp
     Vru.cpp
-    Vru.h
+    Vru.hpp
     ../common/FmiFunctions.cpp
 )
 

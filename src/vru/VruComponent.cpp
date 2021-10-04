@@ -1,4 +1,4 @@
-#include "VruComponent.h"
+#include "VruComponent.hpp"
 #include <iostream>
 
 VruComponent::VruComponent(std::string instance_name, const fmi2Type type, const fmi2String uuid,

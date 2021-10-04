@@ -1,5 +1,4 @@
-#include "UdpSender.h"
-#include <iostream>
+#include "UdpSender.hpp"
 
 UdpSender::UdpSender()
     : io_service_()
@@ -26,7 +25,6 @@ void UdpSender::close() {
 }
 
 void UdpSender::sendTo(const std::string& ip, int port, const std::string& payload) {
-    
     const auto endpoint = boost::asio::ip::udp::endpoint(
         boost::asio::ip::address::from_string(ip), 
         static_cast<unsigned short>(port));

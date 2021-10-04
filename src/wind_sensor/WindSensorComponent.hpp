@@ -1,7 +1,9 @@
 #pragma once
 
-#include <common/Component.h>
-#include "WindSensor.h"
+#include <string>
+
+#include "common/Component.hpp"
+#include "WindSensor.hpp"
 
 class WindSensorComponent : public Component {
 public:

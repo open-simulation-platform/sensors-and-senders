@@ -1,4 +1,4 @@
-#include "WindSensor.h"
+#include "WindSensor.hpp"
 
 WindSensor::WindSensor() 
     : _direction_noise(0.0, 0.05, 100)

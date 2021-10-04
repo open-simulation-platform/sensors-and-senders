@@ -3,13 +3,11 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
-#include <optional>
-#include <variant>
 
-#include <common/Component.h>
-#include "NmeaTelegram.h"
-#include "Enums.h"
-#include "UdpSender.h"
+#include "common/Component.hpp"
+#include "NmeaTelegram.hpp"
+#include "Enums.hpp"
+#include "UdpSender.hpp"
 
 struct Variable {
     Causality causality;

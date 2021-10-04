@@ -1,10 +1,10 @@
 target_sources(wind_sensor
     PRIVATE
     WindSensorComponent.cpp
-    WindSensorComponent.h
+    WindSensorComponent.hpp
     FmiInstantiate.cpp
     WindSensor.cpp
-    WindSensor.h
+    WindSensor.hpp
     ../common/FmiFunctions.cpp
 )
 

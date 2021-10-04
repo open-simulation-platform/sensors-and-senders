@@ -1,9 +1,9 @@
-#include "ConfigParser.h"
-
-#include <nlohmann/json.hpp>
-#include "NmeaTelegram.h"
 #include <string>
 #include <istream>
+
+#include "ConfigParser.hpp"
+#include "nlohmann/json.hpp"
+#include "NmeaTelegram.hpp"
 
 NmeaConfig parseNmeaConfig(const boost::filesystem::path& path) {
 

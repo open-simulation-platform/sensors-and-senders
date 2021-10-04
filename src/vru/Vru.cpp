@@ -1,4 +1,4 @@
-#include "Vru.h"
+#include "Vru.hpp"
 
 Vru::Vru()
     : _roll_noise(0.0, 0.0087, 100)

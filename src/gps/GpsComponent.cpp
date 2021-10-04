@@ -1,4 +1,4 @@
-#include "GpsComponent.h"
+#include "GpsComponent.hpp"
 #include <iostream>
 
 GpsComponent::GpsComponent(std::string instance_name, const fmi2Type type, const fmi2String uuid,

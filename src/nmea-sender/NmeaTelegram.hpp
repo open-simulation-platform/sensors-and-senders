@@ -2,9 +2,8 @@
 
 #include <string>
 #include <vector>
-#include <map>
-#include <utility>
 #include <variant>
+#include <optional>
 
 struct NmeaField {
     std::string name;

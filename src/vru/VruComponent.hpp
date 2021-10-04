@@ -1,9 +1,11 @@
 #pragma once
 
 #include <string>
-#include <common/Component.h>
-#include <common/fmi/fmi2TypesPlatform.h>
-#include "Vru.h"
+
+#include "Vru.hpp"
+
+#include "common/Component.hpp"
+#include "common/fmi/fmi2TypesPlatform.h"
 
 class VruComponent : public Component {
 public:

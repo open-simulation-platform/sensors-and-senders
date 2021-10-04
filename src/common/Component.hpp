@@ -4,8 +4,9 @@
 #include <map>
 #include <optional>
 #include <string>
-#include <common/fmi/fmi2TypesPlatform.h>
-#include <common/fmi/fmi2FunctionTypes.h>
+
+#include "common/fmi/fmi2TypesPlatform.h"
+#include "common/fmi/fmi2FunctionTypes.h"
 
 #ifdef _WIN32
     #define DLL_EXPORT __declspec(dllexport)

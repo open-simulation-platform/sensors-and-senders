@@ -1,4 +1,4 @@
-#include "Component.h"
+#include "Component.hpp"
 
 Component::Component(std::string instanceName, const fmi2Type type, const fmi2String uuid,
         std::string resourcesDirectory, const fmi2CallbackFunctions* callbackFunctions)

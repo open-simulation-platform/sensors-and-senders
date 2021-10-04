@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
 #include <boost/filesystem.hpp>
-#include "NmeaTelegram.h"
+
+#include "NmeaTelegram.hpp"
 
 struct NmeaConfig {
     std::string remoteIp;

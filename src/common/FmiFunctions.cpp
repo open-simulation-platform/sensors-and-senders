@@ -1,5 +1,5 @@
 #include "common/fmi/fmi2Functions.h"
-#include "Component.h"
+#include "Component.hpp"
 
 fmi2String fmi2GetTypesPlatform() {
     return fmi2TypesPlatform;

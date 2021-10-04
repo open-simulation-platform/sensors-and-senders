@@ -1,9 +1,7 @@
-#include "NmeaTelegram.h"
+#include "NmeaTelegram.hpp"
 
 #include <numeric>
 #include <sstream>
-#include <map>
-#include <functional>
 #include <iostream>
 #include <iomanip>
 

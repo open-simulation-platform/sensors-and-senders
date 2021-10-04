@@ -1,4 +1,4 @@
-#include "MarkovNoise.h"
+#include "MarkovNoise.hpp"
 #include <cmath>
 
 MarkovNoise::MarkovNoise(double mean, double std, double time_constant)

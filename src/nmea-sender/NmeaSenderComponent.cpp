@@ -1,10 +1,11 @@
-#include "NmeaSenderComponent.h"
 #include <boost/filesystem.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <utility>
-#include <nlohmann/json.hpp>
 #include <algorithm>
-#include "ConfigParser.h"
+
+#include "NmeaSenderComponent.hpp"
+#include "nlohmann/json.hpp"
+#include "ConfigParser.hpp"
 
 NmeaSenderComponent::NmeaSenderComponent(const std::string& instance_name, const fmi2Type type, const fmi2String uuid, const std::string& resource_directory,
         const fmi2CallbackFunctions* callback_functions)
