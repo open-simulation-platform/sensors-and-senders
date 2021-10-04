@@ -1,7 +1,7 @@
 #include "GpsComponent.hpp"
 #include <iostream>
 
-GpsComponent::GpsComponent(std::string instance_name, const fmi2Type type, const fmi2String uuid,
+GpsComponent::GpsComponent(std::string instance_name, const fmi2Type& type, const fmi2String& uuid,
     std::string resource_directory, const fmi2CallbackFunctions* callback_functions)
     : Component(std::move(instance_name), type, uuid, std::move(resource_directory), callback_functions)
 {

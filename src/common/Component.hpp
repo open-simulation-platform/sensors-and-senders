@@ -21,7 +21,7 @@ struct Value {
 class DLL_EXPORT Component {
 public:
 
-    Component(std::string instanceName, const fmi2Type type, const fmi2String uuid,  
+    Component(std::string instanceName, const fmi2Type& type, const fmi2String& uuid,  
         std::string resourcesDirectory, const fmi2CallbackFunctions* callbackFunctions);
 
     virtual ~Component() = default;
@@ -51,7 +51,6 @@ public:
     fmi2Type type() const;
     const std::string_view uuid() const;
     const std::string_view resourcesDirectory() const;
-
 
 protected:
 

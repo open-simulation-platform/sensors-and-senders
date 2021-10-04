@@ -2,7 +2,7 @@
 
 class Ned2LLH {
 public:
-    Ned2LLH(double initial_latitude = 62.00 , double initial_longitude = 6.328221  , double initial_height = 0.0);
+    explicit Ned2LLH(double initial_latitude = 62.00 , double initial_longitude = 6.328221  , double initial_height = 0.0);
     
     double latitude(double north_position) const;
     double longitude(double east_position) const;
@@ -13,8 +13,8 @@ private:
     double delta_latitude(double north_position) const;
     double delta_longitude(double east_position) const;
 
-    double rn();
-    double rm();
+    double rn() const;
+    double rm() const;
 
     double _earth_eccentricity = 0.0818;
     double _equatorial_radius = 6378137;

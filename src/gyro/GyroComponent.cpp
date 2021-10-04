@@ -1,7 +1,7 @@
 #include "GyroComponent.hpp"
 #include <iostream>
 
-GyroComponent::GyroComponent(const std::string& instance_name, const fmi2Type type, const fmi2String uuid,
+GyroComponent::GyroComponent(const std::string& instance_name, const fmi2Type& type, const fmi2String& uuid,
     const std::string& resources_directory, const fmi2CallbackFunctions* callback_functions)
     : Component(instance_name, type, uuid, resources_directory, callback_functions)
 {

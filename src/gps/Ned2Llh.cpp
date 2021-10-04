@@ -31,13 +31,13 @@ double Ned2LLH::delta_longitude(double east_position) const {
         std::atan2(1, _rn * std::cos(deg2rad(_initial_latitude)));
 }
 
-double Ned2LLH::rn() {
+double Ned2LLH::rn() const {
 
     return _equatorial_radius /  
         std::sqrt( 1  - std::pow(_earth_eccentricity, 2) * std::pow(std::sin(deg2rad(_initial_latitude)), 2));
 }
 
-double Ned2LLH::rm() {
+double Ned2LLH::rm() const {
 
     return (1 - std::pow(_earth_eccentricity, 2)) *
     _rn /

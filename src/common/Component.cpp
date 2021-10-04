@@ -1,6 +1,6 @@
 #include "Component.hpp"
 
-Component::Component(std::string instanceName, const fmi2Type type, const fmi2String uuid,
+Component::Component(std::string instanceName, const fmi2Type& type, const fmi2String& uuid,
         std::string resourcesDirectory, const fmi2CallbackFunctions* callbackFunctions)
     : instance_name_(std::move(instanceName))
     , uuid_(uuid)
@@ -18,7 +18,7 @@ void Component::setReal(fmi2ValueReference reference, fmi2Real value) {
 std::optional<double> Component::real(fmi2ValueReference reference) const {
 
     if(values_.find(reference) != values_.end()) {      
-        if(auto value = std::get_if<double>(&(values_.at(reference).value))) {
+        if(const auto* value = std::get_if<double>(&(values_.at(reference).value))) {
             return {*value};
         }
     }
@@ -33,7 +33,7 @@ void Component::setInteger(fmi2ValueReference reference, fmi2Integer value) {
 std::optional<int> Component::integer(fmi2ValueReference reference) const {
     
     if(values_.find(reference) != values_.end()) {      
-        if(auto value = std::get_if<int>(&(values_.at(reference).value))) {
+        if(const auto* value = std::get_if<int>(&(values_.at(reference).value))) {
             return {*value};
         }
     }
@@ -48,7 +48,7 @@ void Component::setBoolean(fmi2ValueReference reference, fmi2Boolean value) {
 std::optional<bool> Component::boolean(fmi2ValueReference reference) const {
 
     if(values_.find(reference) != values_.end()) {      
-        if(auto value = std::get_if<bool>(&(values_.at(reference).value))) {
+        if(const auto* value = std::get_if<bool>(&(values_.at(reference).value))) {
             return {*value};
         }
     }
@@ -63,7 +63,7 @@ void Component::setString(fmi2ValueReference reference, fmi2String string) {
 std::optional<fmi2String> Component::string(fmi2ValueReference reference) const {
     
     if(values_.find(reference) != values_.end()) {
-        if(const auto value = std::get_if<std::string>(&(values_.at(reference).value))) {
+        if(const auto* value = std::get_if<std::string>(&(values_.at(reference).value))) {
             return value->c_str();
         }
     }

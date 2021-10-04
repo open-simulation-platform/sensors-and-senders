@@ -18,10 +18,8 @@ struct Variable {
 class NmeaSenderComponent : public Component {
 public:
 
-    NmeaSenderComponent(const std::string& instance_name, const fmi2Type type, const fmi2String uuid, const std::string& resource_directory,
+    NmeaSenderComponent(const std::string& instance_name, const fmi2Type& type, const fmi2String& uuid, const std::string& resource_directory,
         const fmi2CallbackFunctions* callback_functions);
-
-    ~NmeaSenderComponent() = default;
 
     void enter_initialization() override;
     void step(double step_size) override;
@@ -33,7 +31,6 @@ private:
 
     void updateTelegrams();
     void sendTelegrams();
-
 
     //Variables have unique names
     std::unordered_map<std::string, Variable> variables_;

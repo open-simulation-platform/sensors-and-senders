@@ -8,7 +8,7 @@ PosRefOffset::PosRefOffset(const AntennaPosition& antenna_position)
 
 }
 
-std::array<double, 3> PosRefOffset::get_offset(std::array<double, 3> orientation) {
+std::array<double, 3> PosRefOffset::get_offset(std::array<double, 3> orientation) const {
     
     std::array<double, 3> gps_offset {0, 0, 0};
 

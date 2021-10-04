@@ -1,7 +1,7 @@
 #include "VruComponent.hpp"
 #include <iostream>
 
-VruComponent::VruComponent(std::string instance_name, const fmi2Type type, const fmi2String uuid,
+VruComponent::VruComponent(std::string instance_name, const fmi2Type& type, const fmi2String& uuid,
     std::string resources_directory, const fmi2CallbackFunctions* callback_functions)
     : Component(std::move(instance_name), type, uuid, std::move(resources_directory), callback_functions)
 {

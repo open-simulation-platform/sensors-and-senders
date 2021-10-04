@@ -7,7 +7,7 @@
 #include "nlohmann/json.hpp"
 #include "ConfigParser.hpp"
 
-NmeaSenderComponent::NmeaSenderComponent(const std::string& instance_name, const fmi2Type type, const fmi2String uuid, const std::string& resource_directory,
+NmeaSenderComponent::NmeaSenderComponent(const std::string& instance_name, const fmi2Type& type, const fmi2String& uuid, const std::string& resource_directory,
         const fmi2CallbackFunctions* callback_functions)
     : Component(instance_name, type, uuid, resource_directory, callback_functions)
 {

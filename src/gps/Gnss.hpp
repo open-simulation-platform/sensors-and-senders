@@ -16,8 +16,8 @@ struct AntennaPosition {
 class PosRefOffset {
 public:
 
-    PosRefOffset(const AntennaPosition& antenna_position);
-    std::array<double, 3> get_offset(std::array<double, 3> orientation);
+    explicit PosRefOffset(const AntennaPosition& antenna_position);
+    std::array<double, 3> get_offset(std::array<double, 3> orientation) const;
 
     AntennaPosition& antenna_position();
 
@@ -49,7 +49,7 @@ public:
     using ned_state = std::array<double, 6>;
     using lat_lon_height = std::array<double, 3>;
 
-    Gnss(const AntennaPosition& antenna_position);
+    explicit Gnss(const AntennaPosition& antenna_position);
 
     void step(ned_state, double step_size);
 
