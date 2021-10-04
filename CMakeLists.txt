@@ -5,13 +5,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-
-find_package(GTest REQUIRED)
 find_package(Boost REQUIRED COMPONENTS filesystem system)
-enable_testing()
 
 add_library(project_warnings INTERFACE)
 include(cmake/CompilerWarnings.cmake)
+include_directories(thirdparty)
 set_project_warnings(project_warnings)
 
 if(NOT WIN32)
