@@ -45,7 +45,7 @@ std::string NmeaTelegram::encode() const {
 
     nmeaMessage.append("*");
     std::stringstream stream;
-    stream << std::hex << checksum;
+    stream << std::setfill('0') << std::setw(2) << std::hex << std::uppercase << checksum;
     nmeaMessage.append(stream.str());
     nmeaMessage.append("\r\n");
 
