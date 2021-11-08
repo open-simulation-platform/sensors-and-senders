@@ -1,17 +1,13 @@
 #include <string>
-#include <istream>
+#include <fstream>
 
 #include "ConfigParser.hpp"
 #include "nlohmann/json.hpp"
 #include "NmeaTelegram.hpp"
 
-NmeaConfig parseNmeaConfig(const boost::filesystem::path& path) {
+NmeaConfig parseNmeaConfig(const std::string& path) {
 
-    if(!boost::filesystem::exists(path)) {
-        return {};
-    }
-
-    std::ifstream configFile (path.string());
+    std::ifstream configFile (path);
     nlohmann::json nmeaConfig;
     configFile >> nmeaConfig;
 

@@ -1,4 +1,3 @@
-#include <boost/filesystem.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <utility>
 #include <algorithm>
@@ -28,22 +27,11 @@ void NmeaSenderComponent::parseModelDescription() {
         resources_directory_.erase(n, scheme.length());
     }
 
-    boost::filesystem::path path (resources_directory_.c_str());
-
-    auto descriptionPath = path.parent_path();
-    descriptionPath /= "modelDescription.xml";
-
-    if(!boost::filesystem::exists(descriptionPath)) {
-
-        auto message = descriptionPath.string() + " not found\n";
-        
-        callback_functions_->logger(nullptr, instance_name_.c_str(), fmi2Fatal,
-            "debug", message.c_str());
-    }
+    std::string model_description_path = resources_directory_ + "/../modelDescription.xml";
 
     boost::property_tree::ptree modelDescription;
     try {
-        boost::property_tree::read_xml(descriptionPath.string(), modelDescription);
+        boost::property_tree::read_xml(model_description_path, modelDescription);
 
     } catch(const boost::property_tree::xml_parser_error& error) {
 
@@ -103,11 +91,14 @@ void NmeaSenderComponent::parseModelDescription() {
 
 void NmeaSenderComponent::parseConfig() {
 
-    boost::filesystem::path path(resources_directory_.c_str());
-    path /= "NmeaConfig.json";
+    std::string path = resources_directory_ + "/NmeaConfig.json";
 
     const auto NmeaConfig = parseNmeaConfig(path);
     telegrams_ = NmeaConfig.telegrams;
+    if(telegrams_.empty()) {
+        callback_functions_->logger(nullptr, instance_name_.c_str(), fmi2Warning,
+            "debug", "No NMEA telegrams have been configured for this sender. Please check resources/NmeaConfig.json");
+    }
 
     remoteIp_ = NmeaConfig.remoteIp;
     remotePort_ = NmeaConfig.remotePort;
@@ -147,5 +138,5 @@ void NmeaSenderComponent::sendTelegrams() {
 }
 
 void NmeaSenderComponent::enter_initialization() {
-    
+
 }

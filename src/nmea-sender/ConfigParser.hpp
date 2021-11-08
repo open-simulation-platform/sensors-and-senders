@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include <boost/filesystem.hpp>
 
 #include "NmeaTelegram.hpp"
 
@@ -10,4 +9,4 @@ struct NmeaConfig {
     std::vector<NmeaTelegram> telegrams;
 };
 
-NmeaConfig parseNmeaConfig(const boost::filesystem::path& path);
+NmeaConfig parseNmeaConfig(const std::string& path);
