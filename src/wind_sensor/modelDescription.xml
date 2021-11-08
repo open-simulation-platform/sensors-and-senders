@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="2.0" modelName="wind_sensor" guid="0b2d56af-6776-4028-baf3-78b435192ad8">
+    <CoSimulation 
+        modelIdentifier="libwind_sensor" 
+        canHandleVariableCommunicationStepSize="true"
+        canNotUseMemoryManagementFunctions="true" 
+    />
+    <DefaultExperiment />
+
+    <ModelVariables>
+
+        <ScalarVariable name="direction" valueReference="0" description="Wind direction relative vessel bow (+/- 180 degrees). This is direction coming from." causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="direction_reference" valueReference="1" description="Direction reference (R = relative direction)" causality="output">
+            <String />
+        </ScalarVariable>
+        <ScalarVariable name="speed" valueReference="2" description="Wind speed (meter/second)" causality="output">
+            <Real />
+        </ScalarVariable>
+        <ScalarVariable name="speed_reference" valueReference="3" description="Wind speed unit (M = meter/second)" causality="output">
+            <String />
+        </ScalarVariable>
+        <ScalarVariable name="sensor_ok" valueReference="4" description="Wind sensor is OK (A = OK, all other statuses are not accepted)." causality="output">
+            <String />
+        </ScalarVariable>
+
+        <ScalarVariable name="wind_speed" valueReference="5" description="Wind speed from wind model" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable> 
+        
+        <ScalarVariable name="wind_direction" valueReference="6" description="Wind direction from wind model" causality="input">
+            <Real start="0.0"/>
+        </ScalarVariable> 
+        
+
+        <ScalarVariable name="direction_noise_mean" valueReference="7" description="Mean value of direction noise" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="direction_noise_standard_deviation" valueReference="8" description="Standard deviation of direction noise" causality="parameter" variability="tunable">
+            <Real start="0.0087"/>
+        </ScalarVariable>
+
+        
+        <ScalarVariable name="speed_noise_mean" valueReference="9" description="Mean value of speed noise" causality="parameter" variability="tunable">
+            <Real start="0.0"/>
+        </ScalarVariable>
+        <ScalarVariable name="speed_noise_standard_deviation" valueReference="10" description="Standard deviation of speed noise" causality="parameter" variability="tunable">
+            <Real start="0.05"/>
+        </ScalarVariable>
+
+        <ScalarVariable name="enable_sensor_fault" valueReference="11" description="Sets sensor to nok OK when true" causality="parameter" variability="tunable">
+            <Boolean start="false"/>
+        </ScalarVariable>
+
+
+
+    </ModelVariables>
+
+    <ModelStructure />
+
+</fmiModelDescription>
