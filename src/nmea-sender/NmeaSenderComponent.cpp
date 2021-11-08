@@ -15,7 +15,12 @@ NmeaSenderComponent::NmeaSenderComponent(const std::string& instance_name, const
 
 void NmeaSenderComponent::parseModelDescription() {
 
-    std::string scheme {"file://"};
+    #ifdef _WIN32
+        std::string scheme {"file:///"};
+    #elif
+        std::string scheme {"file://"};
+    #endif
+    
     const auto n = resources_directory_.find(scheme);
     if (n != std::string::npos) {
         resources_directory_.erase(n, scheme.length());
