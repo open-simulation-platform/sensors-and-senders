@@ -37,7 +37,7 @@ private:
     //Variables have unique names
     std::unordered_map<std::string, Variable> variables_;
 
-    std::vector<NmeaTelegram> telegrams_;
+    std::vector<Nmea::Telegram> telegrams_;
 
     std::string remoteIp_ = "127.0.0.1";
     int remotePort_ = 50555;

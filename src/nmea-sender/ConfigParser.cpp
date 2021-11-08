@@ -17,13 +17,13 @@ NmeaConfig parseNmeaConfig(const std::string& path) {
 
     auto createTelegrams = [](const nlohmann::json& element) {
 
-        NmeaTelegram telegram(element["TelegramName"]);
+        Nmea::Telegram telegram(element["TelegramName"]);
 
         auto telegramFields = element["Fields"];
 
         for (const auto& telegramField : telegramFields) {
             
-            NmeaField field;
+            Nmea::Field field;
             field.name = telegramField["VariableName"];
 
             if (telegramField.find("Decimals") != telegramField.end()) {
@@ -40,7 +40,7 @@ NmeaConfig parseNmeaConfig(const std::string& path) {
         return telegram;
     };
 
-    std::vector<NmeaTelegram> telegrams;
+    std::vector<Nmea::Telegram> telegrams;
     std::transform(telegramConfig.begin(), telegramConfig.end(), std::back_inserter(telegrams), createTelegrams);
 
     config.telegrams = telegrams;

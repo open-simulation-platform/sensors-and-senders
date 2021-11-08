@@ -5,16 +5,18 @@
 #include <iostream>
 #include <iomanip>
 
-NmeaTelegram::NmeaTelegram(std::string talker_id)
+namespace Nmea {
+
+Telegram::Telegram(std::string talker_id)
     : talker_id(std::move(talker_id)) {
 }
 
-std::string NmeaTelegram::encode() const {
+std::string encode(const Nmea::Telegram& telegram) {
 
     std::stringstream nmeaStream;
-    nmeaStream << "$" << talker_id;
+    nmeaStream << "$" << telegram.talker_id;
 
-    for (const auto& field  : fields) {
+    for (const auto& field  : telegram.fields) {
         nmeaStream << ",";
 
         if(field.decimals.has_value()){
@@ -41,4 +43,6 @@ std::string NmeaTelegram::encode() const {
     nmeaMessage.append("\r\n");
 
     return nmeaMessage;
+}
+
 }

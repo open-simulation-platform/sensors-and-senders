@@ -6,7 +6,7 @@
 struct NmeaConfig {
     std::string remoteIp;
     int remotePort;
-    std::vector<NmeaTelegram> telegrams;
+    std::vector<Nmea::Telegram> telegrams;
 };
 
 NmeaConfig parseNmeaConfig(const std::string& path);

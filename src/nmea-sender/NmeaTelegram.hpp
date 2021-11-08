@@ -4,7 +4,9 @@
 #include <vector>
 #include <optional>
 
-struct NmeaField {
+namespace Nmea {
+
+struct Field {
     std::string name;
     std::string value;
     std::optional<int> decimals;
@@ -12,15 +14,16 @@ struct NmeaField {
 };
 
 //Holds a list of variables names that should be extracted from the modelDescription.xml and encoded into an NMEA string
-class NmeaTelegram {
+class Telegram {
 public:
 
-    explicit NmeaTelegram(std::string talkerId);
-
-    std::string encode() const;
+    explicit Telegram(std::string talkerId);
 
     std::string talker_id;
-    std::vector<NmeaField> fields;
+    std::vector<Nmea::Field> fields;
 };
 
+std::string encode(const Nmea::Telegram&);
+
+}
 

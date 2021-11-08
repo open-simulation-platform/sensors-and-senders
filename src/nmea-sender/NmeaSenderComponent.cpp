@@ -119,7 +119,7 @@ void NmeaSenderComponent::step(double step_size) {
 
 void NmeaSenderComponent::updateTelegrams() {
 
-    const auto updateField = [this](NmeaField& field) {
+    const auto updateField = [this](Nmea::Field& field) {
 
         if (variables_.find(field.name) != variables_.end()) {
             auto variable = variables_[field.name];
@@ -151,8 +151,8 @@ void NmeaSenderComponent::sendTelegrams() {
     
     for (const auto& telegram: telegrams_) {
 
-        auto nmeaTelegram = telegram.encode();
-        udpSender_.sendTo(remoteIp_, remotePort_, nmeaTelegram);
+        auto payload = encode(telegram);
+        udpSender_.sendTo(remoteIp_, remotePort_, payload);
     }
 }
 
