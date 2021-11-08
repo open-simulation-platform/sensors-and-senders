@@ -139,6 +139,8 @@ void GpsComponent::reset() {
     _gnss = std::make_unique<Gnss>(AntennaPosition{0.0, 0.0, 0.0});
 }
 
-void GpsComponent::enter_initialization() {
-    
+void GpsComponent::enter_initialization() {   
+}
+
+void GpsComponent::exit_initialization() {
 }

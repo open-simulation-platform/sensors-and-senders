@@ -52,7 +52,8 @@ fmi2Status fmi2EnterInitializationMode(fmi2Component component) {
 
 fmi2Status fmi2ExitInitializationMode(fmi2Component component) {
     
-    (void) component;
+    const auto typed_component = static_cast<Component*>(component);
+    typed_component->exit_initialization();
 
     return fmi2OK;
 }

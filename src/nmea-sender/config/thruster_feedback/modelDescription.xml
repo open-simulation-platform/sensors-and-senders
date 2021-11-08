@@ -79,6 +79,13 @@
             <Integer start="2"/>
         </ScalarVariable>
 
+        <ScalarVariable name="RemoteIp" valueReference="25" description="NMEA telegrams are sent to this remote host" causality="parameter">
+            <String start="127.0.0.1"/>
+        </ScalarVariable>
+        <ScalarVariable name="RemotePort" valueReference="26" description="NMEA telegrams are sent to this remote hoste" causality="parameter">
+            <Integer start="32104"/>
+        </ScalarVariable>
+
         </ModelVariables>
 
 

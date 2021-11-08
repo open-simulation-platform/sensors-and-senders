@@ -1,6 +1,4 @@
 {
-    "RemoteIp": "172.21.101.1",
-    "RemotePort": 32103,
     "Telegrams": [{
         "TelegramName": "GPGGA",
         "Fields": [ {

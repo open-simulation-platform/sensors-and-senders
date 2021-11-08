@@ -13,6 +13,7 @@ struct Variable {
     Causality causality;
     fmi2ValueReference valueReference;
     Type type;
+    std::string start;
 };
 
 class NmeaSenderComponent : public Component {
@@ -22,6 +23,7 @@ public:
         const fmi2CallbackFunctions* callback_functions);
 
     void enter_initialization() override;
+    void exit_initialization() override;
     void step(double step_size) override;
 
 private:

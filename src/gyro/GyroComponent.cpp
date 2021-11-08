@@ -48,5 +48,7 @@ void GyroComponent::step(double step_size) {
 }
 
 void GyroComponent::enter_initialization() {
-    
+}
+
+void GyroComponent::exit_initialization() {
 }

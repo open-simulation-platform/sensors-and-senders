@@ -46,6 +46,8 @@ public:
 
     virtual void step(double step_size) = 0;
     virtual void enter_initialization() = 0;
+    virtual void exit_initialization() = 0;
+
 
     const std::string_view instanceName() const;
     fmi2Type type() const;

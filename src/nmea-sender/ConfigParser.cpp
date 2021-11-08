@@ -12,8 +12,6 @@ NmeaConfig parseNmeaConfig(const std::string& path) {
     configFile >> nmeaConfig;
 
     NmeaConfig config;
-    config.remoteIp = nmeaConfig["RemoteIp"].get<std::string>();  
-    config.remotePort = nmeaConfig["RemotePort"].get<int>();
 
     const auto telegramConfig = nmeaConfig["Telegrams"];
 

@@ -1,9 +1,9 @@
 #include <boost/property_tree/xml_parser.hpp>
 #include <utility>
 #include <algorithm>
+#include <array>
 
 #include "NmeaSenderComponent.hpp"
-#include "nlohmann/json.hpp"
 #include "ConfigParser.hpp"
 
 NmeaSenderComponent::NmeaSenderComponent(const std::string& instance_name, const fmi2Type& type, const fmi2String& uuid, const std::string& resource_directory,
@@ -13,12 +13,11 @@ NmeaSenderComponent::NmeaSenderComponent(const std::string& instance_name, const
 
     parseModelDescription();
     parseConfig();
-    udpSender_.open();
 }
 
 void NmeaSenderComponent::parseModelDescription() {
 
-    const std::vector<std::string> schemes {"file:///", "file://"};
+    const std::array<std::string, 2> schemes {"file:///", "file://"};
     for(const auto& scheme : schemes) {
         const auto n = resources_directory_.find(scheme);
         if (n == std::string::npos) {
@@ -47,16 +46,29 @@ void NmeaSenderComponent::parseModelDescription() {
         var.valueReference = static_cast<fmi2ValueReference>(property.second.get<int>("<xmlattr>.valueReference"));
         var.causality = toCausality(property.second.get<std::string>("<xmlattr>.causality"));
 
+        auto field_name = "Invalid";
         if(property.second.get_child_optional("Real")) {
             var.type = Type::Real;
+            field_name = "Real";
+            var.start = "0.0";
         } else if (property.second.get_child_optional("Integer")) {
             var.type = Type::Integer;
+            field_name = "Integer";
+            var.start = "0";
         } else if (property.second.get_child_optional("Boolean")) {
             var.type = Type::Boolean;
+            field_name = "Boolean";
+            var.start = "0";
         } else if (property.second.get_child_optional("String")) {
             var.type = Type::String;
+            field_name = "String";
+            var.start = "";
         } else {
             var.type = Type::Invalid;
+        }
+
+        if(var.causality == Causality::Parameter || var.causality == Causality::Input) {
+            var.start = property.second.get_child_optional(field_name)->get<std::string>("<xmlattr>.start");
         }
 
         auto name = property.second.get<std::string>("<xmlattr>.name");
@@ -72,16 +84,16 @@ void NmeaSenderComponent::parseModelDescription() {
         
         switch(variable.type) {
             case Type::Real:
-                values_[variable.valueReference].value.emplace<double>(0.0);
+                values_[variable.valueReference].value = std::stod(variable.start);
                 break;
             case Type::Integer:
-                values_[variable.valueReference].value.emplace<int>(0);
+                values_[variable.valueReference].value = std::stoi(variable.start);
                 break;
             case Type::Boolean:
-                values_[variable.valueReference].value.emplace<bool>(false);
+                values_[variable.valueReference].value = static_cast<bool>(std::stoi(variable.start));
                 break;
             case Type::String:
-                values_[variable.valueReference].value.emplace<std::string>("");
+                values_[variable.valueReference].value = variable.start;
                 break;
             case Type::Invalid:
                 break;
@@ -99,14 +111,13 @@ void NmeaSenderComponent::parseConfig() {
         callback_functions_->logger(nullptr, instance_name_.c_str(), fmi2Warning,
             "debug", "No NMEA telegrams have been configured for this sender. Please check resources/NmeaConfig.json");
     }
-
-    remoteIp_ = NmeaConfig.remoteIp;
-    remotePort_ = NmeaConfig.remotePort;
 }
 
 void NmeaSenderComponent::step(double step_size) {
 
     (void) step_size;
+    remoteIp_ = string(25).value();
+    remotePort_ = integer(26).value();
 
     updateTelegrams();
     sendTelegrams();
@@ -123,7 +134,6 @@ void NmeaSenderComponent::updateTelegrams() {
     };
 
     for (auto& telegram : telegrams_) {
-
         std::for_each(telegram.begin(), telegram.end(), updateField);
     }
 }
@@ -138,5 +148,8 @@ void NmeaSenderComponent::sendTelegrams() {
 }
 
 void NmeaSenderComponent::enter_initialization() {
+}
 
+void NmeaSenderComponent::exit_initialization() {
+    udpSender_.open();
 }

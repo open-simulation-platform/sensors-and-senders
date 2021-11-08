@@ -69,5 +69,7 @@ void VruComponent::step(double step_size) {
 }
 
 void VruComponent::enter_initialization() {
+}
 
+void VruComponent::exit_initialization() {
 }
