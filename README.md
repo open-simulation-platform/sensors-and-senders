@@ -15,7 +15,7 @@ This repository contains source code for FMUs for generating NMEA sensor data fo
 
 ## Nmea Sender
 
-The Nmea is an FMU capable of encoding NMEA telegrams and sending them over UDP to a specific host and port. The library itself comes with no input variables or configured telegrams and must be manually, or automatically, configured to generate telegrams. The FMU interface is configured through the modelDescription.xml file. Adding a new entry to the ModelVariables node will cause that variable to appear in the FMU interface. This is possible because the FMU reads its own modelDescription file at instantiation time. 
+The Nmea sender is an FMU capable of encoding NMEA telegrams and sending them over UDP to a specific host and port. The library itself comes with no input variables or configured telegrams and must be manually, or automatically, configured to generate telegrams. The FMU interface is configured through the modelDescription.xml file. Adding a new entry to the ModelVariables node will cause that variable to appear in the FMU interface. This is possible because the FMU reads its own modelDescription file at instantiation time. 
 
 The telegrams are configured through the NmeaConfig.json file which must be put in the fmu's resources folder. The files defines a list of telegrams with fields where each field is name mapped to a ModelVariable in the modelDescription.xml file. The repository comes with a set of examples for gps, vru and wind sensors.
 
