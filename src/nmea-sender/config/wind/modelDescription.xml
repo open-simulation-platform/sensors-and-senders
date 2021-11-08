@@ -19,10 +19,10 @@
         <ScalarVariable name="Status" valueReference="5" description="Wind sensor is OK (A = OK, all other statuses are not accepted)" causality="input">
             <String start="A"/>
         </ScalarVariable>
-        <ScalarVariable name="RemoteIp" valueReference="25" description="NMEA telegrams are sent to this remote host" causality="parameter">
+        <ScalarVariable name="RemoteIp" valueReference="25" description="NMEA telegrams are sent to this remote host" causality="parameter" variability="tunable">
             <String start="127.0.0.1"/>
         </ScalarVariable>
-        <ScalarVariable name="RemotePort" valueReference="26" description="NMEA telegrams are sent to this remote hoste" causality="parameter">
+        <ScalarVariable name="RemotePort" valueReference="26" description="NMEA telegrams are sent to this remote hoste" causality="parameter" variability="tunable">
             <Integer start="32101"/>
         </ScalarVariable>
     </ModelVariables>
