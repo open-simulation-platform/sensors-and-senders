@@ -74,17 +74,15 @@ fmi2Status fmi2GetReal(fmi2Component component, const fmi2ValueReference referen
 
     const auto typedComponent = static_cast<Component*>(component);
 
+    auto res = fmi2OK;
     for( decltype(referencesSize) i = 0; i < referencesSize; ++i) {
-        auto value = typedComponent->real(references[i]);
-
-        if (!value) {
-            return fmi2Warning;
+        res = typedComponent->real(references[i], values[i]);
+        if(res != fmi2OK) {
+            break;
         }
-
-        values[i] = value.value();
     }
 
-    return fmi2OK;
+    return res;
 }
 
 fmi2Status fmi2GetInteger(fmi2Component component, const fmi2ValueReference references[], size_t referencesSize,
@@ -92,22 +90,20 @@ fmi2Status fmi2GetInteger(fmi2Component component, const fmi2ValueReference refe
 
     if (component == NULL) {
         return fmi2Error;
-    } 
-
+    }
 
     const auto typedComponent = static_cast<Component*>(component);
 
+    auto res = fmi2OK;
     for (decltype(referencesSize) i = 0; i < referencesSize; ++i) {
 
-        auto value = typedComponent->integer(references[i]);
-        
-        if(!value) {
-            return fmi2Warning;
+        res = typedComponent->integer(references[i], values[i]);
+        if(res != fmi2OK) {
+            break;
         }
-
-        values[i] = value.value();
     }
-    return fmi2OK;
+
+    return res;
 }
 
 fmi2Status fmi2GetBoolean(fmi2Component component, const fmi2ValueReference references[], size_t referencesSize,
@@ -119,17 +115,16 @@ fmi2Status fmi2GetBoolean(fmi2Component component, const fmi2ValueReference refe
 
     const auto typedComponent = static_cast<Component*>(component);
 
+    auto res = fmi2OK;
     for (decltype(referencesSize) i = 0; i < referencesSize; ++i) {
-        auto value = typedComponent->boolean(references[i]);
+        res = typedComponent->boolean(references[i], values[i]);
 
-        if(!value) {
-            return fmi2Warning;
+        if(res != fmi2OK) {
+            break;
         }
-
-        values[i] = static_cast<fmi2Boolean>(value.value());
     }
 
-    return fmi2OK;
+    return res;
 }
 
 fmi2Status fmi2GetString(fmi2Component component, const fmi2ValueReference references[], size_t referencesSize,
@@ -141,18 +136,17 @@ fmi2Status fmi2GetString(fmi2Component component, const fmi2ValueReference refer
     
     const auto typedComponent = static_cast<Component*>(component);
 
+    auto res = fmi2OK;
     for (decltype(referencesSize) i = 0; i < referencesSize; ++i) {
         
-        auto value = typedComponent->string(references[i]);
+        auto value = typedComponent->string(references[i], values[i]);
 
-        if(!value) {
+        if(res != fmi2OK) {
             return fmi2Warning;
         }
-
-        values[i] = value.value();
     }
 
-    return fmi2OK;
+    return res;
 }
 
 fmi2Status fmi2SetReal(fmi2Component component, const fmi2ValueReference references[], size_t referencesSize,
@@ -160,11 +154,15 @@ fmi2Status fmi2SetReal(fmi2Component component, const fmi2ValueReference referen
 
     auto typedComponent = static_cast<Component*>(component);
 
+    auto res = fmi2OK;
     for (decltype(referencesSize) i = 0; i < referencesSize; ++i) {
-        typedComponent->setReal(references[i], values[i]);
+        res = typedComponent->set_real(references[i], values[i]);
+        if(res != fmi2OK) {
+            break;
+        }
     }
     
-    return fmi2OK;
+    return res;
 }
 
 fmi2Status fmi2SetInteger(fmi2Component component, const fmi2ValueReference references[], size_t referencesSize,
@@ -172,11 +170,15 @@ fmi2Status fmi2SetInteger(fmi2Component component, const fmi2ValueReference refe
     
     auto typedComponent = static_cast<Component*>(component);
 
+    auto res = fmi2OK;
     for (decltype(referencesSize) i = 0; i < referencesSize; ++i) {
-        typedComponent->setInteger(references[i], values[i]);
+        res = typedComponent->set_integer(references[i], values[i]);
+        if(res != fmi2OK) {
+            break;
+        }
     }
 
-    return fmi2OK;
+    return res;
 }
 
 fmi2Status fmi2SetBoolean(fmi2Component component, const fmi2ValueReference references[], size_t referencesSize,
@@ -184,11 +186,15 @@ fmi2Status fmi2SetBoolean(fmi2Component component, const fmi2ValueReference refe
     
     auto typedComponent = static_cast<Component*>(component);
 
+    auto res = fmi2OK;
     for (decltype(referencesSize) i = 0; i < referencesSize; ++i) {
-        typedComponent->setBoolean(references[i], values[i]);
+        res = typedComponent->set_boolean(references[i], values[i]);
+        if(res != fmi2OK) {
+            break;
+        }
     }
 
-    return fmi2OK;
+    return res;
 }
 
 fmi2Status fmi2SetString(fmi2Component component, const fmi2ValueReference references[], size_t referencesSize,
@@ -196,11 +202,15 @@ fmi2Status fmi2SetString(fmi2Component component, const fmi2ValueReference refer
 
     auto typedComponent = static_cast<Component*>(component);
 
+    auto res = fmi2OK;
     for (decltype(referencesSize) i = 0; i < referencesSize; ++i) {
-        typedComponent->setString(references[i], values[i]);
+        res =typedComponent->set_string(references[i], values[i]);
+        if(res != fmi2OK) {
+            break;
+        }
     }
 
-    return fmi2OK;
+    return res;
 }
 
 fmi2Status fmi2SetRealInputDerivatives(fmi2Component component, const fmi2ValueReference references[],

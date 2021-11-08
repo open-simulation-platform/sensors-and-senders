@@ -1,8 +1,6 @@
 #pragma once
 
-#include <variant>
 #include <map>
-#include <optional>
 #include <string>
 
 #include "common/fmi/fmi2TypesPlatform.h"
@@ -13,10 +11,6 @@
 #else 
     #define DLL_EXPORT
 #endif
-
-struct Value {
-    std::variant<int, double, bool, std::string> value;  
-};
 
 class DLL_EXPORT Component {
 public:
@@ -32,17 +26,17 @@ public:
     Component& operator=(const Component&) = default;
     Component& operator=(Component&&) = default;
 
-    void setReal(fmi2ValueReference reference, fmi2Real value);
-    std::optional<double> real(fmi2ValueReference reference) const;
+    fmi2Status set_real(fmi2ValueReference reference, fmi2Real value);
+    fmi2Status real(fmi2ValueReference reference, fmi2Real& value) const;
 
-    void setInteger(fmi2ValueReference reference, fmi2Integer value);
-    std::optional<int> integer(fmi2ValueReference reference) const;
+    fmi2Status set_integer(fmi2ValueReference reference, fmi2Integer value);
+    fmi2Status integer(fmi2ValueReference reference, fmi2Integer& value) const;
 
-    void setBoolean(fmi2ValueReference reference, fmi2Boolean value);
-    std::optional<bool> boolean(fmi2ValueReference reference) const;
+    fmi2Status set_boolean(fmi2ValueReference reference, fmi2Boolean value);
+    fmi2Status boolean(fmi2ValueReference reference, fmi2Boolean& value) const;
 
-    void setString(fmi2ValueReference reference, fmi2String string);
-    std::optional<fmi2String> string(fmi2ValueReference reference) const;
+    fmi2Status set_string(fmi2ValueReference reference, fmi2String string);
+    fmi2Status string(fmi2ValueReference reference, fmi2String& str) const;
 
     virtual void step(double step_size) = 0;
     virtual void enter_initialization() = 0;
@@ -58,7 +52,10 @@ protected:
 
     void logMessage(const fmi2Status& status, const std::string& message, const std::string& category = "") const;
 
-    std::map<fmi2ValueReference, Value> values_;
+    std::map<fmi2ValueReference, double> m_reals;
+    std::map<fmi2ValueReference, int> m_integers;
+    std::map<fmi2ValueReference, bool> m_booleans;
+    std::map<fmi2ValueReference, std::string> m_strings;
 
     std::string instance_name_;
     std::string uuid_;

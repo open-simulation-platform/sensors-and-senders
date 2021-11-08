@@ -22,4 +22,4 @@ if(WIN32)
     target_link_libraries(nmea_sender PRIVATE wsock32 ws2_32)
 endif()
 
-target_link_libraries(nmea_sender PUBLIC ${Boost_LIBRARIES} PRIVATE fmi_interface fmi_common project_warnings)
+target_link_libraries(nmea_sender PUBLIC ${Boost_LIBRARIES} PRIVATE fmi_interface fmi_common pthread project_warnings)

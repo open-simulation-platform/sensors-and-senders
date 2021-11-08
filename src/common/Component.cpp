@@ -11,64 +11,64 @@ Component::Component(std::string instanceName, const fmi2Type& type, const fmi2S
 }
 
 
-void Component::setReal(fmi2ValueReference reference, fmi2Real value) {
-    values_[reference].value = value;
+fmi2Status Component::set_real(fmi2ValueReference reference, fmi2Real value) {
+    m_reals[reference] = value;
+    return fmi2OK;
 }
 
-std::optional<double> Component::real(fmi2ValueReference reference) const {
+fmi2Status Component::real(fmi2ValueReference reference, fmi2Real& value) const {
 
-    if(values_.find(reference) != values_.end()) {      
-        if(const auto* value = std::get_if<double>(&(values_.at(reference).value))) {
-            return {*value};
-        }
+    if(m_reals.find(reference) != m_reals.end()) {      
+        value = m_reals.at(reference);
+        return fmi2OK;
     }
 
-    return {};
+    return fmi2Error;
 }
 
-void Component::setInteger(fmi2ValueReference reference, fmi2Integer value) {
-    values_[reference].value = value;
+fmi2Status Component::set_integer(fmi2ValueReference reference, fmi2Integer value) {
+    m_integers[reference] = value;
+    return fmi2OK;
 }
 
-std::optional<int> Component::integer(fmi2ValueReference reference) const {
+fmi2Status Component::integer(fmi2ValueReference reference, fmi2Integer& value) const {
     
-    if(values_.find(reference) != values_.end()) {      
-        if(const auto* value = std::get_if<int>(&(values_.at(reference).value))) {
-            return {*value};
-        }
+    if(m_integers.find(reference) != m_integers.end()) {      
+        value = m_integers.at(reference);
+        return fmi2OK;
     }
 
-    return {};
+    return fmi2Error;
 }
 
-void Component::setBoolean(fmi2ValueReference reference, fmi2Boolean value) {
-    values_[reference].value = static_cast<bool>(value);
+fmi2Status Component::set_boolean(fmi2ValueReference reference, fmi2Boolean value) {
+    m_booleans[reference] = static_cast<bool>(value);
+    return fmi2OK;
 }
 
-std::optional<bool> Component::boolean(fmi2ValueReference reference) const {
+fmi2Status Component::boolean(fmi2ValueReference reference, fmi2Boolean& value) const {
 
-    if(values_.find(reference) != values_.end()) {      
-        if(const auto* value = std::get_if<bool>(&(values_.at(reference).value))) {
-            return {*value};
-        }
+    if(m_booleans.find(reference) != m_booleans.end()) {      
+        value = static_cast<fmi2Boolean>(m_booleans.at(reference));
+        return fmi2OK;
     }
+
+    return fmi2Error;
+}
+
+fmi2Status Component::set_string(fmi2ValueReference reference, fmi2String string) {
+    m_strings[reference] = std::string {string};
+    return fmi2OK;
+}
+
+fmi2Status Component::string(fmi2ValueReference reference, fmi2String& string) const {
     
-    return {};
-}
-
-void Component::setString(fmi2ValueReference reference, fmi2String string) {
-        values_[reference].value = std::string {string};
-}
-
-std::optional<fmi2String> Component::string(fmi2ValueReference reference) const {
-    
-    if(values_.find(reference) != values_.end()) {
-        if(const auto* value = std::get_if<std::string>(&(values_.at(reference).value))) {
-            return value->c_str();
-        }
+    if(m_strings.find(reference) != m_strings.end()) {
+        string = m_strings.at(reference).c_str();
+        return fmi2OK;
     }
 
-    return {};
+    return fmi2Error;
 }
 
 const std::string_view Component::instanceName() const {

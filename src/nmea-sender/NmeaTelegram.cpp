@@ -5,16 +5,16 @@
 #include <iostream>
 #include <iomanip>
 
-NmeaTelegram::NmeaTelegram(std::string talkerId)
-    : talkerId_(std::move(talkerId)) {
+NmeaTelegram::NmeaTelegram(std::string talker_id)
+    : talker_id(std::move(talker_id)) {
 }
 
 std::string NmeaTelegram::encode() const {
 
     std::stringstream nmeaStream;
-    nmeaStream << "$" << talkerId_;
+    nmeaStream << "$" << talker_id;
 
-    for (const auto& field  : fields_) {
+    for (const auto& field  : fields) {
         nmeaStream << ",";
 
         if(field.decimals.has_value()){
@@ -27,16 +27,7 @@ std::string NmeaTelegram::encode() const {
             nmeaStream.width(field.length.value());
         }
         
-        if (auto float_value = std::get_if<double>(&field.value)) {
-            nmeaStream << *float_value;
-        } else if (auto int_value = std::get_if<int>(&field.value)) {
-            nmeaStream << *int_value;
-        } else if (auto bool_value = std::get_if<bool>(&field.value)) {
-            nmeaStream << *bool_value;
-        } else if (auto string_value = std::get_if<std::string>(&field.value)) {
-            nmeaStream << *string_value;
-        }
-
+        nmeaStream << field.value;
     }
 
     auto nmeaMessage = nmeaStream.str();
@@ -50,20 +41,4 @@ std::string NmeaTelegram::encode() const {
     nmeaMessage.append("\r\n");
 
     return nmeaMessage;
-}
-
-void NmeaTelegram::addField(const NmeaField& field) {
-    fields_.push_back(field);
-}
-
-std::vector<NmeaField>::iterator NmeaTelegram::begin() {
-    return fields_.begin();
-}
-
-std::vector<NmeaField>::iterator NmeaTelegram::end() {
-    return fields_.end();
-}
-
-std::string NmeaTelegram::talkerId() const {
-    return talkerId_;
 }

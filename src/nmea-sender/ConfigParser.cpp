@@ -34,7 +34,7 @@ NmeaConfig parseNmeaConfig(const std::string& path) {
                 field.length = telegramField["Length"];
             }
             
-            telegram.addField(field);
+            telegram.fields.push_back(field);
         }
 
         return telegram;

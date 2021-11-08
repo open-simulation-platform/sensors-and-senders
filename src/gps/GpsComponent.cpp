@@ -1,5 +1,4 @@
 #include "GpsComponent.hpp"
-#include <iostream>
 
 GpsComponent::GpsComponent(std::string instance_name, const fmi2Type& type, const fmi2String& uuid,
     std::string resource_directory, const fmi2CallbackFunctions* callback_functions)
@@ -7,131 +6,126 @@ GpsComponent::GpsComponent(std::string instance_name, const fmi2Type& type, cons
 {
     _gnss = std::make_unique<Gnss>(AntennaPosition{0.0, 0.0, 0.0});   
 
-    values_[21].value = double{0.0};
-    values_[22].value = double{0.0};
-    values_[23].value = double{0.0};
-    values_[24].value = double{0.0};
-    values_[25].value = double{0.0};
-    values_[26].value = double{0.0};
+    m_reals[21] = 0.0;
+    m_reals[22] = 0.0;
+    m_reals[23] = 0.0;
+    m_reals[24] = 0.0;
+    m_reals[25] = 0.0;
+    m_reals[26] = 0.0;
 
-    values_[0].value = _gnss->utc_time();
-    values_[1].value = _gnss->latitude();
-    values_[2].value = _gnss->latitude_direction();
-    values_[3].value = _gnss->longitude();
-    values_[4].value = _gnss->longitude_direction();
-    values_[5].value = _gnss->quality();
-    values_[6].value = _gnss->number_of_satellites();
-    values_[7].value = _gnss->horizontal_dilution();
-    values_[8].value = _gnss->altitude();
-    values_[9].value = _gnss->altitude_unit();
-    values_[10].value = _gnss->height_geo_id();
-    values_[11].value = _gnss->height_unit();
-    values_[12].value = _gnss->update_time();
-    values_[13].value = _gnss->station_id();
+    m_reals[0] = _gnss->utc_time();
+    m_reals[1] = _gnss->latitude();
+    m_strings[2] = _gnss->latitude_direction();
+    m_reals[3] = _gnss->longitude();
+    m_strings[4] = _gnss->longitude_direction();
+    m_integers[5] = _gnss->quality();
+    m_integers[6] = _gnss->number_of_satellites();
+    m_reals[7] = _gnss->horizontal_dilution();
+    m_integers[8] = _gnss->altitude();
+    m_strings[9] = _gnss->altitude_unit();
+    m_integers[10] = _gnss->height_geo_id();
+    m_strings[11] = _gnss->height_unit();
+    m_reals[12] = _gnss->update_time();
+    m_integers[13] = _gnss->station_id();
 
-    values_[14].value = _gnss->rms_residual();
-    values_[15].value = _gnss->error_ellipse_major();
-    values_[16].value = _gnss->error_ellipse_minor();
-    values_[17].value = _gnss->ellipse_orientation();
-    values_[18].value = _gnss->lat_sigma_error();
-    values_[19].value = _gnss->long_sigma_error();
-    values_[20].value = _gnss->height_sigma_error();
+    m_reals[14] = _gnss->rms_residual();
+    m_reals[15] = _gnss->error_ellipse_major();
+    m_reals[16] = _gnss->error_ellipse_minor();
+    m_reals[17] = _gnss->ellipse_orientation();
+    m_reals[18] = _gnss->lat_sigma_error();
+    m_reals[19] = _gnss->long_sigma_error();
+    m_reals[20] = _gnss->height_sigma_error();
 
-    values_[27].value = double{0.0};
-    values_[28].value = double{0.0};
-    values_[29].value = double{0.0};
-    values_[30].value = double{0.0};
-    values_[31].value = double{0.0};
-    values_[32].value = double{0.0};
+    m_reals[27] = 0.0;
+    m_reals[28] = 0.0;
+    m_reals[29] = 0.0;
+    m_reals[30] = 0.0;
+    m_reals[31] = 0.0;
+    m_reals[32] = 0.0;
 
-    values_[33].value = double{0.0};
-    values_[34].value = double{0.0};
-    values_[35].value = double{0.0};
+    m_reals[33] = 0.0;
+    m_reals[34] = 0.0;
+    m_reals[35] = 0.0;
 }
 
 void GpsComponent::step(double step_size) {
 
     Gnss::ned_state ned_state;
 
-    try {
-        ned_state[0] = std::get<1>(values_[21].value);
-        ned_state[1] = std::get<1>(values_[22].value);
-        ned_state[2] = std::get<1>(values_[23].value);
-        ned_state[3] = std::get<1>(values_[24].value);
-        ned_state[4] = std::get<1>(values_[25].value);
-        ned_state[5] = std::get<1>(values_[26].value);
+    ned_state[0] = m_reals[21];
+    ned_state[1] = m_reals[22];
+    ned_state[2] = m_reals[23];
+    ned_state[3] = m_reals[24];
+    ned_state[4] = m_reals[25];
+    ned_state[5] = m_reals[26];
 
-        _gnss->step(ned_state, step_size);
+    _gnss->step(ned_state, step_size);
 
-        values_[0].value = _gnss->utc_time();
-        values_[1].value = _gnss->latitude();
-        values_[2].value = _gnss->latitude_direction();
-        values_[3].value = _gnss->longitude();
-        values_[4].value = _gnss->longitude_direction();
-        values_[5].value = _gnss->quality();
-        values_[6].value = _gnss->number_of_satellites();
-        values_[7].value = _gnss->horizontal_dilution();
-        values_[8].value = _gnss->altitude();
-        values_[9].value = _gnss->altitude_unit();
-        values_[10].value = _gnss->height_geo_id();
-        values_[11].value = _gnss->height_unit();
-        values_[12].value = _gnss->update_time();
-        values_[13].value = _gnss->station_id();
+    m_reals[0] = _gnss->utc_time();
+    m_reals[1] = _gnss->latitude();
+    m_strings[2] = _gnss->latitude_direction();
+    m_reals[3] = _gnss->longitude();
+    m_strings[4] = _gnss->longitude_direction();
+    m_integers[5] = _gnss->quality();
+    m_integers[6] = _gnss->number_of_satellites();
+    m_reals[7] = _gnss->horizontal_dilution();
+    m_integers[8] = _gnss->altitude();
+    m_strings[9] = _gnss->altitude_unit();
+    m_integers[10] = _gnss->height_geo_id();
+    m_strings[11] = _gnss->height_unit();
+    m_reals[12] = _gnss->update_time();
+    m_integers[13] = _gnss->station_id();
 
-        values_[14].value = _gnss->rms_residual();
-        values_[15].value = _gnss->error_ellipse_major();
-        values_[16].value = _gnss->error_ellipse_minor();
-        values_[17].value = _gnss->ellipse_orientation();
-        values_[18].value = _gnss->lat_sigma_error();
-        values_[19].value = _gnss->long_sigma_error();
-        values_[20].value = _gnss->height_sigma_error();
+    m_reals[14] = _gnss->rms_residual();
+    m_reals[15] = _gnss->error_ellipse_major();
+    m_reals[16] = _gnss->error_ellipse_minor();
+    m_reals[17] = _gnss->ellipse_orientation();
+    m_reals[18] = _gnss->lat_sigma_error();
+    m_reals[19] = _gnss->long_sigma_error();
+    m_reals[20] = _gnss->height_sigma_error();
 
-        const auto north_noise_mean = std::get<1>(values_[27].value);
-        if(north_noise_mean != _gnss->north_noise().mean()) {
-            _gnss->north_noise().mean(north_noise_mean);
-        }
+    const auto north_noise_mean = m_reals[27];
+    if(north_noise_mean != _gnss->north_noise().mean()) {
+        _gnss->north_noise().mean(north_noise_mean);
+    }
 
-        const auto north_noise_std = std::get<1>(values_[28].value);
-        if(north_noise_std != _gnss->north_noise().standard_deviation()) {
-            _gnss->north_noise().standard_deviation(north_noise_std);
-        }
+    const auto north_noise_std = m_reals[28];
+    if(north_noise_std != _gnss->north_noise().standard_deviation()) {
+        _gnss->north_noise().standard_deviation(north_noise_std);
+    }
 
-        const auto east_noise_mean = std::get<1>(values_[29].value);
-        if(east_noise_mean != _gnss->east_noise().mean()) {
-            _gnss->east_noise().mean(east_noise_mean);
-        }
+    const auto east_noise_mean = m_reals[29];
+    if(east_noise_mean != _gnss->east_noise().mean()) {
+        _gnss->east_noise().mean(east_noise_mean);
+    }
 
-        const auto east_noise_std = std::get<1>(values_[30].value);
-        if(east_noise_std != _gnss->east_noise().standard_deviation()) {
-            _gnss->east_noise().standard_deviation(east_noise_std);
-        }
+    const auto east_noise_std = m_reals[30];
+    if(east_noise_std != _gnss->east_noise().standard_deviation()) {
+        _gnss->east_noise().standard_deviation(east_noise_std);
+    }
 
-        const auto down_noise_mean = std::get<1>(values_[31].value);
-        if(down_noise_mean != _gnss->down_noise().mean()) {
-            _gnss->down_noise().mean(down_noise_mean);
-        }
+    const auto down_noise_mean = m_reals[31];
+    if(down_noise_mean != _gnss->down_noise().mean()) {
+        _gnss->down_noise().mean(down_noise_mean);
+    }
 
-        const auto down_noise_std = std::get<1>(values_[32].value);
-        if(down_noise_std != _gnss->down_noise().standard_deviation()) {
-            _gnss->down_noise().standard_deviation(down_noise_std);
-        }
+    const auto down_noise_std = m_reals[32];
+    if(down_noise_std != _gnss->down_noise().standard_deviation()) {
+        _gnss->down_noise().standard_deviation(down_noise_std);
+    }
 
-        const auto antenna_x_pos = std::get<1>(values_[33].value);
-        if(antenna_x_pos != _gnss->posref_offset().antenna_position().x) {
-            _gnss->posref_offset().antenna_position().x = antenna_x_pos;
-        }
+    const auto antenna_x_pos = m_reals[33];
+    if(antenna_x_pos != _gnss->posref_offset().antenna_position().x) {
+        _gnss->posref_offset().antenna_position().x = antenna_x_pos;
+    }
 
-        const auto antenna_y_pos = std::get<1>(values_[35].value);
-        if(antenna_y_pos != _gnss->posref_offset().antenna_position().y) {
-            _gnss->posref_offset().antenna_position().y = antenna_y_pos;
-        }
-        const auto antenna_z_pos = std::get<1>(values_[35].value);
-        if(antenna_z_pos != _gnss->posref_offset().antenna_position().z) {
-            _gnss->posref_offset().antenna_position().z = antenna_z_pos;
-        }
-
-    } catch (const std::bad_variant_access& err) {
-        std::cerr << err.what();
+    const auto antenna_y_pos = m_reals[35];
+    if(antenna_y_pos != _gnss->posref_offset().antenna_position().y) {
+        _gnss->posref_offset().antenna_position().y = antenna_y_pos;
+    }
+    const auto antenna_z_pos = m_reals[35];
+    if(antenna_z_pos != _gnss->posref_offset().antenna_position().z) {
+        _gnss->posref_offset().antenna_position().z = antenna_z_pos;
     }
 }
 

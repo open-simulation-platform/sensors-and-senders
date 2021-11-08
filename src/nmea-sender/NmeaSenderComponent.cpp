@@ -1,7 +1,5 @@
 #include <boost/property_tree/xml_parser.hpp>
-#include <utility>
 #include <algorithm>
-#include <array>
 
 #include "NmeaSenderComponent.hpp"
 #include "ConfigParser.hpp"
@@ -77,20 +75,19 @@ void NmeaSenderComponent::parseModelDescription() {
 
     for (const auto& [name, variable] : variables_) {
         (void) name;
-        Value value;
         
         switch(variable.type) {
             case Type::Real:
-                values_[variable.valueReference].value = std::stod(variable.start);
+                m_reals[variable.valueReference] = std::stod(variable.start);
                 break;
             case Type::Integer:
-                values_[variable.valueReference].value = std::stoi(variable.start);
+                m_integers[variable.valueReference] = std::stoi(variable.start);
                 break;
             case Type::Boolean:
-                values_[variable.valueReference].value = static_cast<bool>(std::stoi(variable.start));
+                m_booleans[variable.valueReference] = static_cast<bool>(std::stoi(variable.start));
                 break;
             case Type::String:
-                values_[variable.valueReference].value = variable.start;
+                m_strings[variable.valueReference] = variable.start;
                 break;
             case Type::Invalid:
                 break;
@@ -113,8 +110,8 @@ void NmeaSenderComponent::parseConfig() {
 void NmeaSenderComponent::step(double step_size) {
 
     (void) step_size;
-    remoteIp_ = string(25).value();
-    remotePort_ = integer(26).value();
+    remoteIp_ = m_strings[25];
+    remotePort_ = m_integers[26];
 
     updateTelegrams();
     sendTelegrams();
@@ -126,12 +123,27 @@ void NmeaSenderComponent::updateTelegrams() {
 
         if (variables_.find(field.name) != variables_.end()) {
             auto variable = variables_[field.name];
-            field.value = values_[variable.valueReference].value;
+            switch(variable.type) {
+                case Type::Real:
+                    field.value = std::to_string(m_reals[variable.valueReference]);
+                    break;
+                case Type::Integer:
+                    field.value = std::to_string(m_integers[variable.valueReference]);
+                    break;
+                case Type::Boolean:
+                    field.value = std::to_string(static_cast<int>(m_booleans[variable.valueReference]));
+                    break;
+                case Type::String:
+                    field.value = m_strings[variable.valueReference];
+                    break;
+                default:
+                    field.value = "";
+            }
         }
     };
 
     for (auto& telegram : telegrams_) {
-        std::for_each(telegram.begin(), telegram.end(), updateField);
+        std::for_each(telegram.fields.begin(), telegram.fields.end(), updateField);
     }
 }
 
