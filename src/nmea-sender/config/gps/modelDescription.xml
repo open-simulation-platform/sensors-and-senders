@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fmiModelDescription fmiVersion="2.0" modelName="GPS-Nmea-Sender" guid="530568da-5532-4eac-aab6-f96f482c4e74">
-    <CoSimulation modelIdentifier="libNmeaSender" canHandleVariableCommunicationStepSize="true" />
+    <CoSimulation modelIdentifier="libnmea_sender" canHandleVariableCommunicationStepSize="true" />
     <DefaultExperiment />
     <ModelVariables>
         <ScalarVariable name="UTCTime" valueReference="1" description="Timestamp of position (hh = hour, mm = minute, ss.ss = second)" causality="input">

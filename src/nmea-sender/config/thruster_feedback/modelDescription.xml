@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fmiModelDescription fmiVersion="2.0" modelName="thruster_feedback" guid="086c8873-2f16-4923-96a3-82f74be202a0">
-    <CoSimulation modelIdentifier="libNmeaSender" canHandleVariableCommunicationStepSize="true" />
+    <CoSimulation modelIdentifier="libnmea_sender" canHandleVariableCommunicationStepSize="true" />
     <DefaultExperiment />
 
     <ModelVariables>

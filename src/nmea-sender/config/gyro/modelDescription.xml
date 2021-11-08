@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fmiModelDescription fmiVersion="2.0" modelName="Gyro-Nmea-Sender" guid="530568da-5532-4eac-aab6-f96f482c4e74">
-    <CoSimulation modelIdentifier="libNmeaSender" canHandleVariableCommunicationStepSize="true" />
+    <CoSimulation modelIdentifier="libnmea_sender" canHandleVariableCommunicationStepSize="true" />
     <DefaultExperiment />
 
     <ModelVariables>
