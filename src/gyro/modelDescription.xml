@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fmiModelDescription fmiVersion="2.0" modelName="gyro_sensor_model" guid="ab8d076f-0efd-4a7f-942e-edb713ffe981">
     <CoSimulation 
-        modelIdentifier="libgyroSensor" 
+        modelIdentifier="libgyro" 
         canHandleVariableCommunicationStepSize="true"
         canNotUseMemoryManagementFunctions="true" 
     />
