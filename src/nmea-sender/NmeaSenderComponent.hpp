@@ -35,9 +35,6 @@ private:
     //Variables have unique names
     std::unordered_map<std::string, Variable> variables_;
 
-    //Multiple value references 
-    std::unordered_map<fmi2ValueReference, Value> values_;
-
     std::vector<NmeaTelegram> telegrams_;
 
     std::string remoteIp_ = "127.0.0.1";

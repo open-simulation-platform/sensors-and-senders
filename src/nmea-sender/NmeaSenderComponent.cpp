@@ -89,11 +89,9 @@ void NmeaSenderComponent::parseModelDescription() {
             case Type::Integer:
                 values_[variable.valueReference].value.emplace<int>(0);
                 break;
-            
             case Type::Boolean:
                 values_[variable.valueReference].value.emplace<bool>(false);
                 break;
-            
             case Type::String:
                 values_[variable.valueReference].value.emplace<std::string>("");
                 break;
