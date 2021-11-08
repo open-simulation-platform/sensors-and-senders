@@ -17,12 +17,9 @@ NmeaSenderComponent::NmeaSenderComponent(const std::string& instance_name, const
 
 void NmeaSenderComponent::parseModelDescription() {
 
-    const std::array<std::string, 2> schemes {"file:///", "file://"};
-    for(const auto& scheme : schemes) {
-        const auto n = resources_directory_.find(scheme);
-        if (n == std::string::npos) {
-            continue;
-        }
+    std::string scheme {"file://"};
+    const auto n = resources_directory_.find(scheme);
+    if (n != std::string::npos) {
         resources_directory_.erase(n, scheme.length());
     }
 
