@@ -13,26 +13,7 @@ struct AntennaPosition {
     double z = 0.0;
 };
 
-class PosRefOffset {
-public:
-
-    explicit PosRefOffset(const AntennaPosition& antenna_position);
-    std::array<double, 3> get_offset(std::array<double, 3> orientation) const;
-
-    AntennaPosition& antenna_position();
-
-private:
-    AntennaPosition m_antenna_position;
-};
-
-struct NedPosition {
-    double north;
-    double east;
-    double down;
-    double roll;
-    double pitch;
-    double yaw;
-};
+std::array<double, 3> calculate_offset(const AntennaPosition&, std::array<double, 3> orientation);
 
 class Gnss {
 public:
@@ -74,7 +55,7 @@ public:
     MarkovNoise& east_noise();
     MarkovNoise& down_noise();
 
-    PosRefOffset& posref_offset(); 
+    AntennaPosition& antenna_position(); 
 
     struct Errors {
         double rms_residual = 2.5;
@@ -93,8 +74,7 @@ private:
     double m_height = 0.0;
 
     Ned2LLH ned_to_llh;
-    PosRefOffset m_offset;
-    Gnss::Errors m_gnss_errors;
+    AntennaPosition m_antenna_position;
 
     MarkovNoise m_north_noise;
     MarkovNoise m_east_noise;

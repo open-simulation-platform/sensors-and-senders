@@ -114,19 +114,9 @@ void GpsComponent::step(double step_size) {
         m_gnss->down_noise().standard_deviation(down_noise_std);
     }
 
-    const auto antenna_x_pos = m_reals[33];
-    if(antenna_x_pos != m_gnss->posref_offset().antenna_position().x) {
-        m_gnss->posref_offset().antenna_position().x = antenna_x_pos;
-    }
-
-    const auto antenna_y_pos = m_reals[35];
-    if(antenna_y_pos != m_gnss->posref_offset().antenna_position().y) {
-        m_gnss->posref_offset().antenna_position().y = antenna_y_pos;
-    }
-    const auto antenna_z_pos = m_reals[35];
-    if(antenna_z_pos != m_gnss->posref_offset().antenna_position().z) {
-        m_gnss->posref_offset().antenna_position().z = antenna_z_pos;
-    }
+    m_gnss->antenna_position().x = m_reals[33];
+    m_gnss->antenna_position().y = m_reals[34];
+    m_gnss->antenna_position().z = m_reals[35];
 }
 
 void GpsComponent::reset() {

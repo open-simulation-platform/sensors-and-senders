@@ -2,13 +2,7 @@
 
 #include "Gnss.hpp"
 
-PosRefOffset::PosRefOffset(const AntennaPosition& antenna_position) 
-    : m_antenna_position(antenna_position)
-{
-
-}
-
-std::array<double, 3> PosRefOffset::get_offset(std::array<double, 3> orientation) const {
+std::array<double, 3> calculate_offset(const AntennaPosition& antenna_position, std::array<double, 3> orientation) {
     
     std::array<double, 3> gps_offset {0, 0, 0};
 
@@ -21,39 +15,33 @@ std::array<double, 3> PosRefOffset::get_offset(std::array<double, 3> orientation
     const auto cYaw = std::cos(orientation[2]);
     const auto sYaw = std::sin(orientation[2]);
 
-    gps_offset[0] = m_antenna_position.x * cYaw * cPitch +
-                    m_antenna_position.y * (cYaw * sPitch * sRoll - sYaw * cRoll) +
-                    m_antenna_position.z * (cRoll * sPitch * cYaw + sYaw * sRoll);
+    gps_offset[0] = antenna_position.x * cYaw * cPitch +
+                    antenna_position.y * (cYaw * sPitch * sRoll - sYaw * cRoll) +
+                    antenna_position.z * (cRoll * sPitch * cYaw + sYaw * sRoll);
     
-    gps_offset[1] = m_antenna_position.x * sYaw * cPitch +
-                    m_antenna_position.y * (sYaw * sPitch * sRoll + cYaw * cRoll) +
-                    m_antenna_position.z * (sYaw * sPitch * cRoll - cYaw * sRoll);
+    gps_offset[1] = antenna_position.x * sYaw * cPitch +
+                    antenna_position.y * (sYaw * sPitch * sRoll + cYaw * cRoll) +
+                    antenna_position.z * (sYaw * sPitch * cRoll - cYaw * sRoll);
     
-    gps_offset[2] = m_antenna_position.x * -sPitch +
-                    m_antenna_position.y * cPitch * sRoll + 
-                    m_antenna_position.z * cPitch * cRoll;
+    gps_offset[2] = antenna_position.x * -sPitch +
+                    antenna_position.y * cPitch * sRoll + 
+                    antenna_position.z * cPitch * cRoll;
 
     return gps_offset; 
 }
 
-AntennaPosition& PosRefOffset::antenna_position() {
-    return m_antenna_position;
-}
-
 Gnss::Gnss(const AntennaPosition& antenna_position)
-    : m_offset(antenna_position)
+    : m_antenna_position(antenna_position)
     , m_north_noise(0.0, 0.5, 100.0)
     , m_east_noise(0.0, 0.5, 100.0)
     , m_down_noise(0.0, 0.8, 100.0) {
-
 }
 
+void Gnss::step(ned_state state, double step_size) {
 
-void Gnss::step(ned_state ned_state, double step_size) {
+    std::array<double, 3> position {state[0], state[1], state[2]};
 
-    std::array<double, 3> position {ned_state[0], ned_state[1], ned_state[2]};
-
-    const auto offset = m_offset.get_offset( {ned_state[3], ned_state[4], ned_state[5]});
+    const auto offset = calculate_offset(m_antenna_position, {state[3], state[4], state[5]});
     position[0] += offset[0];
     position[1] += offset[1];
     position[2] += offset[2];
@@ -181,6 +169,6 @@ MarkovNoise& Gnss::down_noise() {
     return m_down_noise;
 }
 
-PosRefOffset& Gnss::posref_offset() {
-    return m_offset;
+AntennaPosition& Gnss::antenna_position() {
+    return m_antenna_position;
 }
