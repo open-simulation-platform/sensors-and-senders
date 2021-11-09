@@ -11,7 +11,7 @@
 
 struct Variable {
     Causality causality;
-    fmi2ValueReference valueReference;
+    fmi2ValueReference reference;
     Type type;
     std::string start;
 };
@@ -28,19 +28,19 @@ public:
 
 private:
 
-    void parseModelDescription();
-    void parseConfig();
+    void parse_model_description();
+    void parse_config();
 
-    void updateTelegrams();
-    void sendTelegrams();
+    void update_telegrams();
+    void send_telegrams();
 
     //Variables have unique names
-    std::unordered_map<std::string, Variable> variables_;
+    std::unordered_map<std::string, Variable> m_variables;
 
-    std::vector<Nmea::Telegram> telegrams_;
+    std::vector<Nmea::Telegram> m_telegrams;
 
-    std::string remoteIp_ = "127.0.0.1";
-    int remotePort_ = 50555;
-    UdpSender udpSender_;
+    std::string m_remote_ip = "127.0.0.1";
+    int m_remote_port = 50555;
+    UdpSender m_udp_sender;
 };
 

@@ -9,11 +9,11 @@ NmeaSenderComponent::NmeaSenderComponent(const std::string& instance_name, const
     : Component(instance_name, type, uuid, resource_directory, callback_functions)
 {
 
-    parseModelDescription();
-    parseConfig();
+    parse_model_description();
+    parse_config();
 }
 
-void NmeaSenderComponent::parseModelDescription() {
+void NmeaSenderComponent::parse_model_description() {
 
     #ifdef _WIN32
         std::string scheme {"file:///"};
@@ -21,12 +21,12 @@ void NmeaSenderComponent::parseModelDescription() {
         std::string scheme {"file://"};
     #endif
     
-    const auto n = resources_directory_.find(scheme);
+    const auto n = m_resources_directory.find(scheme);
     if (n != std::string::npos) {
-        resources_directory_.erase(n, scheme.length());
+        m_resources_directory.erase(n, scheme.length());
     }
 
-    std::string model_description_path = resources_directory_ + "/../modelDescription.xml";
+    std::string model_description_path = m_resources_directory + "/../modelDescription.xml";
 
     boost::property_tree::ptree modelDescription;
     try {
@@ -34,17 +34,17 @@ void NmeaSenderComponent::parseModelDescription() {
 
     } catch(const boost::property_tree::xml_parser_error& error) {
 
-        callback_functions_->logger(nullptr, instance_name_.c_str(), fmi2Fatal,
+        m_callback_functions->logger(nullptr, m_instance_name.c_str(), fmi2Fatal,
             "debug", error.what());
     }
 
-    auto modelVariables = modelDescription.get_child("fmiModelDescription.ModelVariables");
+    auto model_variables = modelDescription.get_child("fmiModelDescription.ModelVariables");
 
-    auto toVariables = [](const std::pair<boost::property_tree::ptree::key_type, boost::property_tree::ptree>& property) {
+    auto to_variables = [](const std::pair<boost::property_tree::ptree::key_type, boost::property_tree::ptree>& property) {
         
         Variable var {};
-        var.valueReference = static_cast<fmi2ValueReference>(property.second.get<int>("<xmlattr>.valueReference"));
-        var.causality = toCausality(property.second.get<std::string>("<xmlattr>.causality"));
+        var.reference = static_cast<fmi2ValueReference>(property.second.get<int>("<xmlattr>.valueReference"));
+        var.causality = to_causality(property.second.get<std::string>("<xmlattr>.causality"));
 
         auto field_name = "Invalid";
         if(property.second.get_child_optional("Real")) {
@@ -76,23 +76,23 @@ void NmeaSenderComponent::parseModelDescription() {
         return std::make_pair(name, var);
     };
 
-    std::transform(modelVariables.begin(), modelVariables.end(), std::inserter(variables_, variables_.end()), toVariables);
+    std::transform(model_variables.begin(), model_variables.end(), std::inserter(m_variables, m_variables.end()), to_variables);
 
-    for (const auto& [name, variable] : variables_) {
+    for (const auto& [name, variable] : m_variables) {
         (void) name;
         
         switch(variable.type) {
             case Type::Real:
-                m_reals[variable.valueReference] = std::stod(variable.start);
+                m_reals[variable.reference] = std::stod(variable.start);
                 break;
             case Type::Integer:
-                m_integers[variable.valueReference] = std::stoi(variable.start);
+                m_integers[variable.reference] = std::stoi(variable.start);
                 break;
             case Type::Boolean:
-                m_booleans[variable.valueReference] = static_cast<bool>(std::stoi(variable.start));
+                m_booleans[variable.reference] = static_cast<bool>(std::stoi(variable.start));
                 break;
             case Type::String:
-                m_strings[variable.valueReference] = variable.start;
+                m_strings[variable.reference] = variable.start;
                 break;
             case Type::Invalid:
                 break;
@@ -100,14 +100,14 @@ void NmeaSenderComponent::parseModelDescription() {
     }
 }
 
-void NmeaSenderComponent::parseConfig() {
+void NmeaSenderComponent::parse_config() {
 
-    std::string path = resources_directory_ + "/NmeaConfig.json";
+    std::string path = m_resources_directory + "/NmeaConfig.json";
 
-    const auto NmeaConfig = parseNmeaConfig(path);
-    telegrams_ = NmeaConfig.telegrams;
-    if(telegrams_.empty()) {
-        callback_functions_->logger(nullptr, instance_name_.c_str(), fmi2Warning,
+    const auto nmea_config = parse_nmea_config(path);
+    m_telegrams = nmea_config.telegrams;
+    if(m_telegrams.empty()) {
+        m_callback_functions->logger(nullptr, m_instance_name.c_str(), fmi2Warning,
             "debug", "No NMEA telegrams have been configured for this sender. Please check resources/NmeaConfig.json");
     }
 }
@@ -115,49 +115,50 @@ void NmeaSenderComponent::parseConfig() {
 void NmeaSenderComponent::step(double step_size) {
 
     (void) step_size;
-    remoteIp_ = m_strings[25];
-    remotePort_ = m_integers[26];
+    m_remote_ip = m_strings[25];
+    m_remote_port = m_integers[26];
 
-    updateTelegrams();
-    sendTelegrams();
+    update_telegrams();
+    send_telegrams();
 }
 
-void NmeaSenderComponent::updateTelegrams() {
+void NmeaSenderComponent::update_telegrams() {
 
-    const auto updateField = [this](Nmea::Field& field) {
+    const auto update_field = [this](Nmea::Field& field) {
 
-        if (variables_.find(field.name) != variables_.end()) {
-            auto variable = variables_[field.name];
+        if (m_variables.find(field.name) != m_variables.end()) {
+            auto variable = m_variables[field.name];
             switch(variable.type) {
                 case Type::Real:
-                    field.value = std::to_string(m_reals[variable.valueReference]);
+                    field.value = std::to_string(m_reals[variable.reference]);
                     break;
                 case Type::Integer:
-                    field.value = std::to_string(m_integers[variable.valueReference]);
+                    field.value = std::to_string(m_integers[variable.reference]);
                     break;
                 case Type::Boolean:
-                    field.value = std::to_string(static_cast<int>(m_booleans[variable.valueReference]));
+                    field.value = std::to_string(static_cast<int>(m_booleans[variable.reference]));
                     break;
                 case Type::String:
-                    field.value = m_strings[variable.valueReference];
+                    field.value = m_strings[variable.reference];
                     break;
                 default:
                     field.value = "";
+                    break;
             }
         }
     };
 
-    for (auto& telegram : telegrams_) {
-        std::for_each(telegram.fields.begin(), telegram.fields.end(), updateField);
+    for (auto& telegram : m_telegrams) {
+        std::for_each(telegram.fields.begin(), telegram.fields.end(), update_field);
     }
 }
 
-void NmeaSenderComponent::sendTelegrams() {
+void NmeaSenderComponent::send_telegrams() {
     
-    for (const auto& telegram: telegrams_) {
+    for (const auto& telegram: m_telegrams) {
 
         auto payload = encode(telegram);
-        udpSender_.sendTo(remoteIp_, remotePort_, payload);
+        m_udp_sender.send_to(m_remote_ip, m_remote_port, payload);
     }
 }
 
@@ -165,5 +166,5 @@ void NmeaSenderComponent::enter_initialization() {
 }
 
 void NmeaSenderComponent::exit_initialization() {
-    udpSender_.open();
+    m_udp_sender.open();
 }

@@ -28,5 +28,5 @@ enum class Type {
     Invalid
 };
 
-Type toType(const std::string& type);
-Causality toCausality(const std::string& causality);
+Type to_type(const std::string& type);
+Causality to_causality(const std::string& causality);

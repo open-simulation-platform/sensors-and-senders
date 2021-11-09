@@ -57,9 +57,9 @@ protected:
     std::map<fmi2ValueReference, bool> m_booleans;
     std::map<fmi2ValueReference, std::string> m_strings;
 
-    std::string instance_name_;
-    std::string uuid_;
-    std::string resources_directory_;
-    fmi2Type type_;
-    const fmi2CallbackFunctions* callback_functions_;
+    std::string m_instance_name;
+    std::string m_uuid;
+    std::string m_resources_directory;
+    fmi2Type m_type;
+    const fmi2CallbackFunctions* m_callback_functions;
 };

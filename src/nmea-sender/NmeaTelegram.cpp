@@ -7,42 +7,42 @@
 
 namespace Nmea {
 
-Telegram::Telegram(std::string talker_id)
-    : talker_id(std::move(talker_id)) {
+Telegram::Telegram(std::string id)
+    : talker_id(std::move(id)) {
 }
 
 std::string encode(const Nmea::Telegram& telegram) {
 
-    std::stringstream nmeaStream;
-    nmeaStream << "$" << telegram.talker_id;
+    std::stringstream nmea_stream;
+    nmea_stream << "$" << telegram.talker_id;
 
     for (const auto& field  : telegram.fields) {
-        nmeaStream << ",";
+        nmea_stream << ",";
 
         if(field.decimals.has_value()){
-            nmeaStream << std::fixed;
-            nmeaStream << std::setprecision(field.decimals.value());
+            nmea_stream << std::fixed;
+            nmea_stream << std::setprecision(field.decimals.value());
         }
 
         if(field.length.has_value()) {
-            nmeaStream.fill('0');
-            nmeaStream.width(field.length.value());
+            nmea_stream.fill('0');
+            nmea_stream.width(field.length.value());
         }
         
-        nmeaStream << field.value;
+        nmea_stream << field.value;
     }
 
-    auto nmeaMessage = nmeaStream.str();
+    auto nmea_message = nmea_stream.str();
 
-    auto checksum = std::accumulate(std::next(nmeaMessage.begin()), nmeaMessage.end(), 0, std::bit_xor<>());
+    auto checksum = std::accumulate(std::next(nmea_message.begin()), nmea_message.end(), 0, std::bit_xor<>());
 
-    nmeaMessage.append("*");
+    nmea_message.append("*");
     std::stringstream stream;
     stream << std::setfill('0') << std::setw(2) << std::hex << std::uppercase << checksum;
-    nmeaMessage.append(stream.str());
-    nmeaMessage.append("\r\n");
+    nmea_message.append(stream.str());
+    nmea_message.append("\r\n");
 
-    return nmeaMessage;
+    return nmea_message;
 }
 
 }

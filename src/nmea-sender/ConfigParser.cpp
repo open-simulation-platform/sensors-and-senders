@@ -5,33 +5,33 @@
 #include "nlohmann/json.hpp"
 #include "NmeaTelegram.hpp"
 
-NmeaConfig parseNmeaConfig(const std::string& path) {
+NmeaConfig parse_nmea_config(const std::string& path) {
 
-    std::ifstream configFile (path);
-    nlohmann::json nmeaConfig;
-    configFile >> nmeaConfig;
+    std::ifstream config_file (path);
+    nlohmann::json nmea_config;
+    config_file >> nmea_config;
 
     NmeaConfig config;
 
-    const auto telegramConfig = nmeaConfig["Telegrams"];
+    const auto telegram_config = nmea_config["Telegrams"];
 
-    auto createTelegrams = [](const nlohmann::json& element) {
+    auto create_telegrams = [](const nlohmann::json& element) {
 
         Nmea::Telegram telegram(element["TelegramName"]);
 
-        auto telegramFields = element["Fields"];
+        auto telegram_fields = element["Fields"];
 
-        for (const auto& telegramField : telegramFields) {
+        for (const auto& telegram_field : telegram_fields) {
             
             Nmea::Field field;
-            field.name = telegramField["VariableName"];
+            field.name = telegram_field["VariableName"];
 
-            if (telegramField.find("Decimals") != telegramField.end()) {
-                field.decimals = telegramField["Decimals"];
+            if (telegram_field.find("Decimals") != telegram_field.end()) {
+                field.decimals = telegram_field["Decimals"];
             }
 
-            if (telegramField.find("Length") != telegramField.end()) {
-                field.length = telegramField["Length"];
+            if (telegram_field.find("Length") != telegram_field.end()) {
+                field.length = telegram_field["Length"];
             }
             
             telegram.fields.push_back(field);
@@ -41,7 +41,7 @@ NmeaConfig parseNmeaConfig(const std::string& path) {
     };
 
     std::vector<Nmea::Telegram> telegrams;
-    std::transform(telegramConfig.begin(), telegramConfig.end(), std::back_inserter(telegrams), createTelegrams);
+    std::transform(telegram_config.begin(), telegram_config.end(), std::back_inserter(telegrams), create_telegrams);
 
     config.telegrams = telegrams;
     return config;

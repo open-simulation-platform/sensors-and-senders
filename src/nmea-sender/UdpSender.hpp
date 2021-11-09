@@ -11,11 +11,11 @@ public:
     
     void open();
     void close();
-    void sendTo(const std::string& ip, int port, const std::string& payload);
+    void send_to(const std::string& ip, int port, const std::string& payload);
 
 private:
 
-    boost::asio::io_service io_service_;
-    boost::asio::ip::udp::endpoint receiver_endpoint_;
-    boost::asio::ip::udp::socket socket_;
+    boost::asio::io_service m_io_service;
+    boost::asio::ip::udp::endpoint m_receiver_endpoint;
+    boost::asio::ip::udp::socket m_socket;
 };

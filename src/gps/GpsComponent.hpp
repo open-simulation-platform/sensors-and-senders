@@ -19,5 +19,5 @@ public:
 
 private:
 
-    std::unique_ptr<Gnss> _gnss;
+    std::unique_ptr<Gnss> m_gnss;
 };

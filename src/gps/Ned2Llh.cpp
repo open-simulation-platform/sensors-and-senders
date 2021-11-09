@@ -4,43 +4,43 @@
 #include <cmath>
 
 Ned2LLH::Ned2LLH(double initial_latitude, double initial_longitude, double initial_height)
-    : _initial_latitude(initial_latitude)
-    , _initial_longitude(initial_longitude)
-    , _initial_height(initial_height)
+    : m_initial_latitude(initial_latitude)
+    , m_initial_longitude(initial_longitude)
+    , m_initial_height(initial_height)
 {
-    _rn = rn();
-    _rm = rm();
+    m_rn = rn();
+    m_rm = rm();
 }
 
 double Ned2LLH::latitude(double north_position) const {
-    return rad2deg(delta_latitude(north_position))  + _initial_latitude;
+    return rad2deg(delta_latitude(north_position))  + m_initial_latitude;
 }
 
 double Ned2LLH::longitude(double east_position) const {        
-    return rad2deg(delta_longitude(east_position)) + _initial_longitude;
+    return rad2deg(delta_longitude(east_position)) + m_initial_longitude;
 }
 
 double Ned2LLH::height(double height) const {
-    return height + _initial_height;
+    return height + m_initial_height;
 }
 
 double Ned2LLH::delta_latitude(double north_position) const {
-    return north_position * std::atan2(1, _rm);
+    return north_position * std::atan2(1, m_rm);
 }
 double Ned2LLH::delta_longitude(double east_position) const {
     return east_position *
-        std::atan2(1, _rn * std::cos(deg2rad(_initial_latitude)));
+        std::atan2(1, m_rn * std::cos(deg2rad(m_initial_latitude)));
 }
 
 double Ned2LLH::rn() const {
 
-    return _equatorial_radius /  
-        std::sqrt( 1  - std::pow(_earth_eccentricity, 2) * std::pow(std::sin(deg2rad(_initial_latitude)), 2));
+    return m_equatorial_radius /  
+        std::sqrt( 1  - std::pow(m_earth_eccentricity, 2) * std::pow(std::sin(deg2rad(m_initial_latitude)), 2));
 }
 
 double Ned2LLH::rm() const {
 
-    return (1 - std::pow(_earth_eccentricity, 2)) *
-    _rn /
-    ( 1 - std::pow(std::sin(deg2rad(_initial_latitude)), 2) * std::pow(_earth_eccentricity, 2));  
+    return (1 - std::pow(m_earth_eccentricity, 2)) *
+    m_rn /
+    ( 1 - std::pow(std::sin(deg2rad(m_initial_latitude)), 2) * std::pow(m_earth_eccentricity, 2));  
 }

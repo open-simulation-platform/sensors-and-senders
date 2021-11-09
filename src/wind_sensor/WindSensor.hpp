@@ -24,14 +24,14 @@ public:
 
 private:
 
-    double _direction = 0.0;
-    double _speed = 0.0;
+    double m_direction = 0.0;
+    double m_speed = 0.0;
 
-    std::string _direction_reference = "R";
-    std::string _speed_reference = "M";
-    std::string _sensor_ok = "A";
+    std::string m_direction_reference = "R";
+    std::string m_speed_reference = "M";
+    std::string m_sensor_ok = "A";
 
-    MarkovNoise _direction_noise;
-    MarkovNoise _speed_noise;
+    MarkovNoise m_direction_noise;
+    MarkovNoise m_speed_noise;
 
 };

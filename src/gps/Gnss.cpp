@@ -3,7 +3,7 @@
 #include "Gnss.hpp"
 
 PosRefOffset::PosRefOffset(const AntennaPosition& antenna_position) 
-    : _antenna_position(antenna_position)
+    : m_antenna_position(antenna_position)
 {
 
 }
@@ -21,30 +21,30 @@ std::array<double, 3> PosRefOffset::get_offset(std::array<double, 3> orientation
     const auto cYaw = std::cos(orientation[2]);
     const auto sYaw = std::sin(orientation[2]);
 
-    gps_offset[0] = _antenna_position.x * cYaw * cPitch +
-                    _antenna_position.y * (cYaw * sPitch * sRoll - sYaw * cRoll) +
-                    _antenna_position.z * (cRoll * sPitch * cYaw + sYaw * sRoll);
+    gps_offset[0] = m_antenna_position.x * cYaw * cPitch +
+                    m_antenna_position.y * (cYaw * sPitch * sRoll - sYaw * cRoll) +
+                    m_antenna_position.z * (cRoll * sPitch * cYaw + sYaw * sRoll);
     
-    gps_offset[1] = _antenna_position.x * sYaw * cPitch +
-                    _antenna_position.y * (sYaw * sPitch * sRoll + cYaw * cRoll) +
-                    _antenna_position.z * (sYaw * sPitch * cRoll - cYaw * sRoll);
+    gps_offset[1] = m_antenna_position.x * sYaw * cPitch +
+                    m_antenna_position.y * (sYaw * sPitch * sRoll + cYaw * cRoll) +
+                    m_antenna_position.z * (sYaw * sPitch * cRoll - cYaw * sRoll);
     
-    gps_offset[2] = _antenna_position.x * -sPitch +
-                    _antenna_position.y * cPitch * sRoll + 
-                    _antenna_position.z * cPitch * cRoll;
+    gps_offset[2] = m_antenna_position.x * -sPitch +
+                    m_antenna_position.y * cPitch * sRoll + 
+                    m_antenna_position.z * cPitch * cRoll;
 
     return gps_offset; 
 }
 
 AntennaPosition& PosRefOffset::antenna_position() {
-    return _antenna_position;
+    return m_antenna_position;
 }
 
 Gnss::Gnss(const AntennaPosition& antenna_position)
-    : _offset(antenna_position)
-    , _north_noise(0.0, 0.5, 100.0)
-    , _east_noise(0.0, 0.5, 100.0)
-    , _down_noise(0.0, 0.8, 100.0) {
+    : m_offset(antenna_position)
+    , m_north_noise(0.0, 0.5, 100.0)
+    , m_east_noise(0.0, 0.5, 100.0)
+    , m_down_noise(0.0, 0.8, 100.0) {
 
 }
 
@@ -53,25 +53,25 @@ void Gnss::step(ned_state ned_state, double step_size) {
 
     std::array<double, 3> position {ned_state[0], ned_state[1], ned_state[2]};
 
-    const auto offset = _offset.get_offset( {ned_state[3], ned_state[4], ned_state[5]});
+    const auto offset = m_offset.get_offset( {ned_state[3], ned_state[4], ned_state[5]});
     position[0] += offset[0];
     position[1] += offset[1];
     position[2] += offset[2];
 
-    _north_noise.step(step_size);
-    _east_noise.step(step_size);
-    _down_noise.step(step_size);
+    m_north_noise.step(step_size);
+    m_east_noise.step(step_size);
+    m_down_noise.step(step_size);
 
-    position[0] += _north_noise.value();
-    position[1] += _east_noise.value();
-    position[2] += _down_noise.value();
+    position[0] += m_north_noise.value();
+    position[1] += m_east_noise.value();
+    position[2] += m_down_noise.value();
 
-    _latitude = ned_to_llh.latitude(position[0]);
-    _longitude = ned_to_llh.longitude(position[1]);
-    _height = ned_to_llh.height(position[2]);
+    m_latitude = ned_to_llh.latitude(position[0]);
+    m_longitude = ned_to_llh.longitude(position[1]);
+    m_height = ned_to_llh.height(position[2]);
 
-    _latitude = to_degrees_and_minutes(_latitude);
-    _longitude = to_degrees_and_minutes(_longitude);
+    m_latitude = to_degrees_and_minutes(m_latitude);
+    m_longitude = to_degrees_and_minutes(m_longitude);
 }
 
 double to_degrees_and_minutes(double value) {
@@ -82,19 +82,19 @@ double to_degrees_and_minutes(double value) {
 }
 
 double Gnss::utc_time() {
-    return _utc_time.time();
+    return m_utc_time.time();
 }
 
 double Gnss::latitude() const {
-    return _latitude;
+    return m_latitude;
 }
 
 double Gnss::longitude() const {
-    return _longitude;
+    return m_longitude;
 }
 
 double Gnss::height() const {
-    return _height;
+    return m_height;
 }
 
 std::string Gnss::latitude_direction() const {
@@ -142,45 +142,45 @@ int Gnss::station_id() const {
 }
 
 double Gnss::rms_residual() const {
-    return _errors.rms_residual;
+    return m_errors.rms_residual;
 }
 
 double Gnss::error_ellipse_major() const {
-    return _errors.ellipse_major;
+    return m_errors.ellipse_major;
 }
 
 double Gnss::error_ellipse_minor() const {
-    return _errors.ellipse_minor;
+    return m_errors.ellipse_minor;
 }
 
 double Gnss::ellipse_orientation() const {
-    return _errors.ellipse_orientation;
+    return m_errors.ellipse_orientation;
 }
 
 double Gnss::lat_sigma_error() const {
-    return _errors.latitude_sigma_error;
+    return m_errors.latitude_sigma_error;
 }
 
 double Gnss::long_sigma_error() const {
-    return _errors.longitude_sigma_error;
+    return m_errors.longitude_sigma_error;
 }
 
 double Gnss::height_sigma_error() const {
-    return _errors.height_sigma_error;
+    return m_errors.height_sigma_error;
 }
 
 MarkovNoise& Gnss::north_noise() {
-    return _north_noise;
+    return m_north_noise;
 }
 
 MarkovNoise& Gnss::east_noise() {
-    return _east_noise;
+    return m_east_noise;
 }
 
 MarkovNoise& Gnss::down_noise() {
-    return _down_noise;
+    return m_down_noise;
 }
 
 PosRefOffset& Gnss::posref_offset() {
-    return _offset;
+    return m_offset;
 }

@@ -22,14 +22,7 @@ public:
     AntennaPosition& antenna_position();
 
 private:
-    AntennaPosition _antenna_position;
-};
-
-
-
-struct GnssParameters {
-    AntennaPosition antenna_position;
-
+    AntennaPosition m_antenna_position;
 };
 
 struct NedPosition {
@@ -40,8 +33,6 @@ struct NedPosition {
     double pitch;
     double yaw;
 };
-
-
 
 class Gnss {
 public:
@@ -95,24 +86,23 @@ public:
         double height_sigma_error = 4.0;
     };
 
-
 private:
 
-    double _latitude  = 62.00;
-    double _longitude = 6.328221;
-    double _height = 0.0;
+    double m_latitude  = 62.00;
+    double m_longitude = 6.328221;
+    double m_height = 0.0;
 
     Ned2LLH ned_to_llh;
-    PosRefOffset _offset;
-    Gnss::Errors gnss_errors;
+    PosRefOffset m_offset;
+    Gnss::Errors m_gnss_errors;
 
-    MarkovNoise _north_noise;
-    MarkovNoise _east_noise;
-    MarkovNoise _down_noise;  
+    MarkovNoise m_north_noise;
+    MarkovNoise m_east_noise;
+    MarkovNoise m_down_noise;  
 
-    Errors _errors;
+    Errors m_errors;
 
-    UtcTime _utc_time;
+    UtcTime m_utc_time;
 };
 
 double to_degrees_and_minutes(double value);

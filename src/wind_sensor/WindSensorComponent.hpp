@@ -17,5 +17,5 @@ public:
 
 private:
 
-    WindSensor _wind_sensor;
+    WindSensor m_wind_sensor;
 };

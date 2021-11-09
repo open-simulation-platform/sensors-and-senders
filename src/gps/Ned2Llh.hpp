@@ -16,13 +16,13 @@ private:
     double rn() const;
     double rm() const;
 
-    double _earth_eccentricity = 0.0818;
-    double _equatorial_radius = 6378137;
+    double m_earth_eccentricity = 0.0818;
+    double m_equatorial_radius = 6378137;
 
-    double _initial_latitude = 62.0;
-    double _initial_longitude = 6.328221;
-    double _initial_height = 0.0;
+    double m_initial_latitude = 62.0;
+    double m_initial_longitude = 6.328221;
+    double m_initial_height = 0.0;
 
-    double _rn;
-    double _rm;
+    double m_rn;
+    double m_rm;
 };

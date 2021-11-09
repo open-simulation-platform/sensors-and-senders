@@ -15,5 +15,5 @@ public:
 
 private:
 
-    Gyro _gyro;
+    Gyro m_gyro;
 };

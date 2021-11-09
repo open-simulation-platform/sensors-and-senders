@@ -13,11 +13,11 @@ struct Field {
     std::optional<int> length;
 };
 
-//Holds a list of variables names that should be extracted from the modelDescription.xml and encoded into an NMEA string
+//Holds a list of variables names that can be encoded into an NMEA string
 class Telegram {
 public:
 
-    explicit Telegram(std::string talkerId);
+    explicit Telegram(std::string id);
 
     std::string talker_id;
     std::vector<Nmea::Field> fields;

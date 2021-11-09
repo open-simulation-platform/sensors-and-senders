@@ -16,13 +16,13 @@ public:
 
 private:
 
-    double _time_constant;
-    double _x;
-    double _x_dot;
+    double m_time_constant;
+    double m_x;
+    double m_x_dot;
 
-    double _mean;
-    double _standard_deviation;
+    double m_mean;
+    double m_standard_deviation;
 
-    std::random_device _random_device;
-    std::normal_distribution<double> _normal_distribution;
+    std::random_device m_random_device;
+    std::normal_distribution<double> m_normal_distribution;
 };

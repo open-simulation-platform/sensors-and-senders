@@ -2,41 +2,41 @@
 #include <cmath>
 
 MarkovNoise::MarkovNoise(double mean, double std, double time_constant)
-    : _time_constant(time_constant)
-    , _x(0.0)
-    , _x_dot(0.0)
-    , _mean(mean)
-    , _standard_deviation(std)
-    , _normal_distribution(mean, std)
+    : m_time_constant(time_constant)
+    , m_x(0.0)
+    , m_x_dot(0.0)
+    , m_mean(mean)
+    , m_standard_deviation(std)
+    , m_normal_distribution(mean, std)
 
 {}
     
 void MarkovNoise::step(double step_size) {
 
-    const auto r = _normal_distribution(_random_device);
-    _x_dot = (r * _time_constant - _x) * 1 / _time_constant;
+    const auto r = m_normal_distribution(m_random_device);
+    m_x_dot = (r * m_time_constant - m_x) * 1 / m_time_constant;
 
-    _x += _x_dot * step_size;
+    m_x += m_x_dot * step_size;
 }
 
 double MarkovNoise::value() const {
-    return _x_dot;
+    return m_x_dot;
 }
 
 void MarkovNoise::mean(double mean) {
-    _mean = mean;
-    _normal_distribution = std::normal_distribution(_mean, _standard_deviation);
+    m_mean = mean;
+    m_normal_distribution = std::normal_distribution(m_mean, m_standard_deviation);
 }
 
 void MarkovNoise::standard_deviation(double standard_deviation) {
-    _standard_deviation = standard_deviation;
-    _normal_distribution = std::normal_distribution(_mean, _standard_deviation);
+    m_standard_deviation = standard_deviation;
+    m_normal_distribution = std::normal_distribution(m_mean, m_standard_deviation);
 }
 
 double MarkovNoise::mean() const {
-    return _mean;
+    return m_mean;
 }
 
 double MarkovNoise::standard_deviation() const {
-    return _standard_deviation;
+    return m_standard_deviation;
 }

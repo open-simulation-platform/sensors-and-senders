@@ -2,21 +2,21 @@
 
 #include <map>
 
-Type toType(const std::string& type) {
+Type to_type(const std::string& type) {
 
-    static const std::map<std::string, Type> typeMap {
+    static const std::map<std::string, Type> type_map {
         {"Real", Type::Real},
         {"Integer", Type::Integer},
         {"String", Type::String},
         {"Boolean", Type::Boolean}
     };
 
-    return typeMap.at(type);
+    return type_map.at(type);
 }
 
-Causality toCausality(const std::string& causality) {
+Causality to_causality(const std::string& causality) {
 
-    static const std::map<std::string, Causality> cMap { 
+    static const std::map<std::string, Causality> c_map { 
         {"input", Causality::Input},
         {"output", Causality::Output},
         {"parameter", Causality::Parameter},
@@ -25,5 +25,5 @@ Causality toCausality(const std::string& causality) {
         {"independent", Causality::Independent} 
     };
 
-    return cMap.at(causality);
+    return c_map.at(causality);
 }

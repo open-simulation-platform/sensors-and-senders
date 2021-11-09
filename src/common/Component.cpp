@@ -2,11 +2,11 @@
 
 Component::Component(std::string instanceName, const fmi2Type& type, const fmi2String& uuid,
         std::string resourcesDirectory, const fmi2CallbackFunctions* callbackFunctions)
-    : instance_name_(std::move(instanceName))
-    , uuid_(uuid)
-    , resources_directory_(std::move(resourcesDirectory))
-    , type_(type)
-    , callback_functions_(callbackFunctions) 
+    : m_instance_name(std::move(instanceName))
+    , m_uuid(uuid)
+    , m_resources_directory(std::move(resourcesDirectory))
+    , m_type(type)
+    , m_callback_functions(callbackFunctions) 
 {
 }
 
@@ -72,24 +72,24 @@ fmi2Status Component::string(fmi2ValueReference reference, fmi2String& string) c
 }
 
 const std::string_view Component::instanceName() const {
-    return instance_name_;
+    return m_instance_name;
 }
 
 fmi2Type Component::type() const {
-    return type_;
+    return m_type;
 }
 
 const std::string_view Component::uuid() const {
-    return uuid_;
+    return m_uuid;
 }
 
 const std::string_view Component::resourcesDirectory() const {
-    return std::string_view (resources_directory_);
+    return std::string_view (m_resources_directory);
 }
 
 void Component::logMessage(const fmi2Status& status, const std::string& message, const std::string& category) const {
-    if(callback_functions_ != nullptr && callback_functions_->logger != nullptr) {
-            callback_functions_->logger(nullptr, instance_name_.c_str(), status, category.c_str(),
+    if(m_callback_functions != nullptr && m_callback_functions->logger != nullptr) {
+            m_callback_functions->logger(nullptr, m_instance_name.c_str(), status, category.c_str(),
         message.c_str());
     }
 }

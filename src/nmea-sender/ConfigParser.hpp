@@ -9,4 +9,4 @@ struct NmeaConfig {
     std::vector<Nmea::Telegram> telegrams;
 };
 
-NmeaConfig parseNmeaConfig(const std::string& path);
+NmeaConfig parse_nmea_config(const std::string& path);
