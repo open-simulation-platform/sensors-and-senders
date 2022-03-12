@@ -17,7 +17,7 @@ void NmeaSenderComponent::parse_model_description() {
 
     #ifdef _WIN32
         std::string scheme {"file:///"};
-    #elif
+    #else
         std::string scheme {"file://"};
     #endif
     
@@ -160,9 +160,6 @@ void NmeaSenderComponent::send_telegrams() {
         auto payload = encode(telegram);
         m_udp_sender.send_to(m_remote_ip, m_remote_port, payload);
     }
-}
-
-void NmeaSenderComponent::enter_initialization() {
 }
 
 void NmeaSenderComponent::exit_initialization() {

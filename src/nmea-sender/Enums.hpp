@@ -11,15 +11,6 @@ enum class Causality {
     Independent,
 };
 
-
-enum class Variability {
-    Constant,
-    Fixed,
-    Tunable,
-    Discrete,
-    Continuous
-};
-
 enum class Type {
     Real,
     Integer,

@@ -39,8 +39,8 @@ public:
     fmi2Status string(fmi2ValueReference reference, fmi2String& str) const;
 
     virtual void step(double step_size) = 0;
-    virtual void enter_initialization() = 0;
-    virtual void exit_initialization() = 0;
+    virtual void enter_initialization() {};
+    virtual void exit_initialization() {};
 
     const std::string& instanceName() const;
     fmi2Type type() const;

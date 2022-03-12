@@ -1,7 +1,6 @@
 #include "GyroComponent.hpp"
 #include "common/math/Conversions.hpp"
 
-
 GyroComponent::GyroComponent(const std::string& instance_name, const fmi2Type& type, const fmi2String& uuid,
     const std::string& resources_directory, const fmi2CallbackFunctions* callback_functions)
     : Component(instance_name, type, uuid, resources_directory, callback_functions)
@@ -41,6 +40,3 @@ void GyroComponent::step(double step_size) {
     m_reals[0] = heading;
     m_strings[1] = m_sensor_ok;
 }
-
-void GyroComponent::enter_initialization() {}
-void GyroComponent::exit_initialization() {}

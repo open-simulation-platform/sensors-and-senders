@@ -56,7 +56,3 @@ void VruComponent::step(double step_size) {
     m_reals[1] = roll + m_roll_noise.value();
     m_reals[2] = pitch + m_pitch_noise.value();
 }
-
-void VruComponent::enter_initialization() {}
-
-void VruComponent::exit_initialization() {}

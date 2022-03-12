@@ -14,8 +14,7 @@ struct Field {
 };
 
 //Holds a list of variables names that can be encoded into an NMEA string
-class Telegram {
-public:
+struct Telegram {
 
     explicit Telegram(std::string id);
 

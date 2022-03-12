@@ -3,8 +3,6 @@ target_sources(wind_sensor
     WindSensorComponent.cpp
     WindSensorComponent.hpp
     FmiInstantiate.cpp
-    WindSensor.cpp
-    WindSensor.hpp
     ../common/FmiFunctions.cpp
 )
 
