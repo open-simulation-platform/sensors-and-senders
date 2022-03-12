@@ -9,7 +9,18 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-find_package(Boost REQUIRED COMPONENTS system)
+#====
+#Project Options
+#====
+option(BUILD_GPS "Build GPS FMU" ON)
+option(BUILD_GYRO "Build Gyro FMU" ON)
+option(BUILD_VRU "Build Vru FMU" ON)
+option(BUILD_WIND_SENSOR "Build Wind Sensor FMU" ON)
+option(BUILD_NMEA_SENDER "Build nmea sender" ON)
+
+if(${BUILD_NMEA_SENDER})
+    find_package(Boost REQUIRED COMPONENTS system)
+endif()
 
 add_library(project_warnings INTERFACE)
 include(cmake/CompilerWarnings.cmake)
@@ -20,13 +31,6 @@ if(NOT WIN32)
     set(CMAKE_BUILD_RPATH_USE_ORIGIN TRUE)
 endif()
 
-#====
-#Project Options
-#====
-option(BUILD_GPS "Build GPS FMU" ON)
-option(BUILD_GYRO "Build Gyro FMU" ON)
-option(BUILD_VRU "Build Vru FMU" ON)
-option(BUILD_WIND_SENSOR "Build Wind Sensor FMU" ON)
-option(BUILD_NMEA_SENDER "Build nmea sender" ON)
+
 
 add_subdirectory(src)
