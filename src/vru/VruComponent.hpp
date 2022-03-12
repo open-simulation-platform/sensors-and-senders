@@ -2,10 +2,10 @@
 
 #include <string>
 
-#include "Vru.hpp"
-
 #include "common/Component.hpp"
 #include "common/fmi/fmi2TypesPlatform.h"
+#include "common/math/MarkovNoise.hpp"
+
 
 class VruComponent : public Component {
 public:
@@ -19,5 +19,7 @@ public:
     
 private:
 
-    Vru _vru;
+    MarkovNoise m_roll_noise;
+    MarkovNoise m_pitch_noise;
+    int sensor_ok = 10;
 };

@@ -3,8 +3,6 @@ target_sources(vru
     VruComponent.cpp
     VruComponent.hpp
     FmiInstantiate.cpp
-    Vru.cpp
-    Vru.hpp
     ../common/FmiFunctions.cpp
 )
 
