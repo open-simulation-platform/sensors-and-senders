@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Gyro.hpp"
 #include "common/Component.hpp"
+#include "common/math/MarkovNoise.hpp"
 
 class GyroComponent : public Component {
 public:
@@ -14,6 +14,6 @@ public:
     void step(double step_size) override;
 
 private:
-
-    Gyro m_gyro;
+    char m_sensor_ok = 'A';
+    MarkovNoise m_noise;
 };

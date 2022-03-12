@@ -6,7 +6,6 @@
 #include "common/fmi/fmi2TypesPlatform.h"
 #include "common/math/MarkovNoise.hpp"
 
-
 class VruComponent : public Component {
 public:
 

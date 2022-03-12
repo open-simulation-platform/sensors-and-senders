@@ -42,11 +42,10 @@ public:
     virtual void enter_initialization() = 0;
     virtual void exit_initialization() = 0;
 
-
-    const std::string_view instanceName() const;
+    const std::string& instanceName() const;
     fmi2Type type() const;
-    const std::string_view uuid() const;
-    const std::string_view resourcesDirectory() const;
+    const std::string& uuid() const;
+    const std::string& resourcesDirectory() const;
 
 protected:
 

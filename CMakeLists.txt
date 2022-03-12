@@ -31,6 +31,4 @@ if(NOT WIN32)
     set(CMAKE_BUILD_RPATH_USE_ORIGIN TRUE)
 endif()
 
-
-
 add_subdirectory(src)

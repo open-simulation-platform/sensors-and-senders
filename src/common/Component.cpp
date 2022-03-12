@@ -71,7 +71,7 @@ fmi2Status Component::string(fmi2ValueReference reference, fmi2String& string) c
     return fmi2Error;
 }
 
-const std::string_view Component::instanceName() const {
+const std::string& Component::instanceName() const {
     return m_instance_name;
 }
 
@@ -79,12 +79,12 @@ fmi2Type Component::type() const {
     return m_type;
 }
 
-const std::string_view Component::uuid() const {
+const std::string& Component::uuid() const {
     return m_uuid;
 }
 
-const std::string_view Component::resourcesDirectory() const {
-    return std::string_view (m_resources_directory);
+const std::string& Component::resourcesDirectory() const {
+    return m_resources_directory;
 }
 
 void Component::logMessage(const fmi2Status& status, const std::string& message, const std::string& category) const {

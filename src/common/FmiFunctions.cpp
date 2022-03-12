@@ -139,8 +139,7 @@ fmi2Status fmi2GetString(fmi2Component component, const fmi2ValueReference refer
     auto res = fmi2OK;
     for (decltype(referencesSize) i = 0; i < referencesSize; ++i) {
         
-        auto value = typedComponent->string(references[i], values[i]);
-
+        res = typedComponent->string(references[i], values[i]);
         if(res != fmi2OK) {
             return fmi2Warning;
         }
